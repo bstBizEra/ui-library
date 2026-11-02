@@ -7,7 +7,7 @@
       "title": "Theme Toggle",
       "description": "Controlled three-way theme switch (system, light, dark) with accessible icon buttons.",
       "dependencies": [
-        "lucide-react"
+        "lucide-react@^1"
       ],
       "files": [
         {
@@ -22,7 +22,7 @@
       "title": "Locale Switcher",
       "description": "Controlled language dropdown with flag icons that closes after a pick.",
       "dependencies": [
-        "lucide-react"
+        "lucide-react@^1"
       ],
       "registryDependencies": [
         "dropdown-menu",
@@ -41,8 +41,8 @@
       "title": "Dropzone",
       "description": "Use when a form needs file upload by drag and drop or click: keyboard-openable, shows accepted types and sizes, and reports rejected files through an onError callback you render as text. Vendored from Kibo UI (shadcnblocks/kibo, MIT).",
       "dependencies": [
-        "react-dropzone",
-        "lucide-react"
+        "react-dropzone@^20",
+        "lucide-react@^1"
       ],
       "registryDependencies": [
         "button"

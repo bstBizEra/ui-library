@@ -10,7 +10,7 @@
         "button"
       ],
       "dependencies": [
-        "lucide-react"
+        "lucide-react@^1"
       ],
       "files": [
         {

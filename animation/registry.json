@@ -7,7 +7,7 @@
       "title": "Text Effect",
       "description": "Per-word, per-character or per-line text reveal animation (Motion Primitives); use for a headline or short line that should animate in and show plainly when the user prefers reduced motion. Vendored from ibelick/motion-primitives (MIT) with a reduced-motion change.",
       "dependencies": [
-        "motion"
+        "motion@^14"
       ],
       "files": [
         {
