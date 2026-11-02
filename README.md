@@ -14,7 +14,9 @@ Installed from `f732fd2` in two fresh Next.js apps (shadcn `base-nova` on Base U
 
 ### icons/flag and components/locale-switcher
 
-Verified 2026-11-03 against `38cc504` (`modal={false}`): Base UI ✓, Radix ✓. Menu opens, picking ລາວ updates the label and closes the menu, ArrowDown + Enter picks, Escape closes and returns focus to the trigger, ລາວ not clipped in light and dark. Impeccable audit: no P0/P1. Detector: clean. Lighthouse accessibility (desktop): Radix 100 in all four runs (navigation light/dark, menu-open snapshot light/dark). Base UI navigation light/dark 100, but with the menu open 96 in light and dark: `aria-hidden-focus` on Base UI's own focus-guard spans (`aria-hidden` with `tabindex=0`) that a non-modal menu adds. With `modal` left on (`f732fd2`) the result was the reverse: Base UI 100, Radix 94.
+Verified 2026-11-03 against `f732fd2` (library-default modal menu): Base UI ✓, Radix ✓. Menu opens, picking ລາວ updates the label and closes the menu, ArrowDown + Enter picks, ລາວ not clipped in light and dark. Impeccable audit: no P0/P1. Detector: clean. Lighthouse accessibility (desktop): Base UI 100 in all four runs (navigation light/dark, menu-open snapshot light/dark); Radix 100 in navigation light/dark and 94 in the menu-open snapshot (see the known issue below).
+
+**Known issue (Radix): menu-open `aria-hidden-focus`.** Radix's modal DropdownMenu sets `aria-hidden` on all content outside the menu, including `<main>`, which holds the still-focusable trigger. axe reports `aria-hidden-focus` (plus `landmark-one-main` and the agentic accessibility-tree audit). The same happens for every shadcn Radix DropdownMenu, so it is waived for this item. `modal={false}` was tried: it fixes Radix but makes Base UI fail on its own focus guards (axe-core#4832), so the default is kept.
 
 ### components/theme-toggle
 
