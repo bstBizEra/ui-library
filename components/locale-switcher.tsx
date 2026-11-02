@@ -40,8 +40,7 @@ export function LocaleSwitcher<L extends FlagCode>({
   const [open, setOpen] = useState(false)
 
   return (
-    // Non-modal: a modal menu hides the page and leaves the focusable trigger inside aria-hidden content on Radix.
-    <DropdownMenu modal={false} open={open} onOpenChange={(next: boolean) => setOpen(next)}>
+    <DropdownMenu open={open} onOpenChange={(next: boolean) => setOpen(next)}>
       <DropdownMenuTrigger
         aria-label={`${label}: ${current.label}`}
         className={cn(
