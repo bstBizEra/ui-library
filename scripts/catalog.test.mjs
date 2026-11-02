@@ -40,7 +40,7 @@ test("marks an item with no files as pointer", () => {
   assert.match(md, /pqoqubbw\/icons\/p#abc/);
   assert.match(md, /\| `components\/a` \| house \|/);
   assert.match(md, /\| `blocks\/v` \| vendored \|.*o\/r@abc.*MIT/);
-  assert.match(md, /Pointer \\| item/);
+  assert.ok(md.includes("Pointer \\| item"));
 });
 
 test("install line uses the tag passed in", () => {

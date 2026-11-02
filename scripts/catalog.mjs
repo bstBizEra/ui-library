@@ -18,7 +18,7 @@ const NOT_YET = [
   ["Neobrutalism components", "neobrutalist styled components"],
 ];
 
-const cell = (s) => String(s ?? "").replace(/\|/g, "\|").replace(/\s+/g, " ").trim();
+const cell = (s) => String(s ?? "").replace(/\|/g, "\\|").replace(/\s+/g, " ").trim();
 
 // Reads the header comment lines (// Key: value) at the top of an item file.
 function header(file) {
