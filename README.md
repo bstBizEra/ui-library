@@ -3,7 +3,7 @@
 A shadcn source registry on GitHub. No build step: the CLI reads `registry.json` and its `include` entries.
 
 ```bash
-npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.0.0
+npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.0.1
 ```
 
 Items are named `<layer>/<item>` (for example `components/theme-toggle`). Pin a version with `#<ref>`. See `CATALOG.md` for every item, what it is for and its licence.
