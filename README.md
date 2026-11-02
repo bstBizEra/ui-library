@@ -17,12 +17,13 @@ On another machine or in a cloud session, install the agent skill with `npx skil
 ## Adding an item
 
 1. Put the file in its layer folder (`icons/`, `components/`, `animation/`, `blocks/`) and add an entry to that layer's `registry.json`. Paths are relative to the layer file. The `description` starts with "Use when" wording: it becomes the catalogue line.
-2. Vendored code: add the header comment (`// Source:`, `// Upstream:`, `// Copied:`, `// Licence:`, and `// Local change:` if any) and an entry in `THIRD_PARTY.md`.
+2. Vendored code: add the header comment (`// Source:`, `// Upstream:`, `// Copied:`, `// Licence:`, and `// Local change:` if any) directly after the import block, not at the top of the file: the shadcn CLI strips every comment before a file's first statement or directive, so a leading header would not reach the consumer. `"use client"` stays the first statement. Add an entry in `THIRD_PARTY.md`. `npm run check` fails a vendored file whose header comes first or lacks `// Source:` or `// Licence:`.
 3. Run `npm test`, `npm run check` and `npx shadcn@latest registry validate`, then run the entry checks below in a Base UI app and a Radix app (results are recorded under Verification).
 
 ### Entry checks
 
 - The item installs by its GitHub address and `npm run build` passes in both apps.
+- The installed copy still carries the `// Source:` and `// Licence:` lines (vendored items).
 - The browser console has no errors (dev build).
 - The item works by keyboard and with a real pointer.
 - Lighthouse accessibility scores 100: navigation and snapshot mode, light and dark. Dark runs use an emulated `prefers-color-scheme`.
