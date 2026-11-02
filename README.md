@@ -3,10 +3,26 @@
 A shadcn source registry on GitHub. No build step: the CLI reads `registry.json` and its `include` entries.
 
 ```bash
-npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle
+npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.0.0
 ```
 
-Items are named `<layer>/<item>` (for example `components/theme-toggle`). Pin a version with `#<ref>`.
+Items are named `<layer>/<item>` (for example `components/theme-toggle`). Pin a version with `#<ref>`. See `CATALOG.md` for every item, what it is for and its licence.
+
+Items expect shadcn's `@/lib/utils` (`cn`) from `shadcn init`.
+
+## Adding an item
+
+1. Put the file in its layer folder (`icons/`, `components/`, `animation/`, `blocks/`) and add an entry to that layer's `registry.json`. Paths are relative to the layer file. The `description` starts with "Use when" wording: it becomes the catalogue line.
+2. Vendored code: add the header comment (`// Source:`, `// Upstream:`, `// Copied:`, `// Licence:`, and `// Local change:` if any) and an entry in `THIRD_PARTY.md`.
+3. Run `npm test`, `npm run check` and `npx shadcn@latest registry validate`, then verify in a Base UI app and a Radix app (see Verification).
+
+## Releasing
+
+1. `node scripts/set-ref.mjs vX.Y.Z` pins same-repo dependencies to the new tag.
+2. `node scripts/catalog.mjs vX.Y.Z` regenerates `CATALOG.md`. `npm run check` compares it against the literal tag in `package.json` (`v1.0.0`): change it there for a new release.
+3. `npm test`, `npm run check`, `npx shadcn@latest registry validate`.
+4. Commit `release: vX.Y.Z`.
+5. Tag and push (`git tag vX.Y.Z && git push origin main vX.Y.Z`). This step needs the owner's OK.
 
 ## Verification
 
@@ -30,7 +46,7 @@ Vendored from lucide-animated (`pqoqubbw/icons`, MIT; see `THIRD_PARTY.md`) beca
 
 ### animation/text-effect
 
-Vendored from Motion Primitives (`ibelick/motion-primitives`, MIT; see `THIRD_PARTY.md`) with one local change: it renders plain text when `prefers-reduced-motion` is set, because upstream ignores it. Verified 2026-11-03 against `a10114e`: Base UI ✓, Radix ✓ (installed by GitHub address, `npm run build` passes in both; the install did not touch `globals.css`). Browser check with emulated reduced motion: `no-preference` animates (per-word opacity 0, then staggered to 1 over about 0.7 s); `reduce` renders `<h2 class="...">text</h2>` with no child elements at opacity 1, in both apps. Impeccable audit 18/20: P0 0, P1 0, P2 1, P3 2 (server HTML starts hidden until hydration). Detector: clean. Lighthouse accessibility (desktop): navigation light 100, dark 100 in both apps. Audit: `task-7-audit-text-effect.md` (in the workflow repo).
+Vendored from Motion Primitives (`ibelick/motion-primitives`, MIT; see `THIRD_PARTY.md`) with one local change: it renders plain text when `prefers-reduced-motion` is set, because upstream ignores it (under reduced motion `onAnimationStart` and `onAnimationComplete` do not fire). Verified 2026-11-03 against `a10114e`: Base UI ✓, Radix ✓ (installed by GitHub address, `npm run build` passes in both; the install did not touch `globals.css`). Browser check with emulated reduced motion: `no-preference` animates (per-word opacity 0, then staggered to 1 over about 0.7 s); `reduce` renders `<h2 class="...">text</h2>` with no child elements at opacity 1, in both apps. Impeccable audit 18/20: P0 0, P1 0, P2 1, P3 2 (server HTML starts hidden until hydration). Detector: clean. Lighthouse accessibility (desktop): navigation light 100, dark 100 in both apps. Audit: `task-7-audit-text-effect.md` (in the workflow repo).
 
 ### blocks/hero-centered
 

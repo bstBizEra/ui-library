@@ -26,7 +26,7 @@
       ],
       "registryDependencies": [
         "dropdown-menu",
-        "bstBizEra/ui-library/icons/flag#3d3c181096df55c187c3a153ef26af85f012727d"
+        "bstBizEra/ui-library/icons/flag#v1.0.0"
       ],
       "files": [
         {
