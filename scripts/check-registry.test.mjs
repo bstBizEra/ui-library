@@ -65,3 +65,28 @@ test("backslash path is an error", () => {
   const errors = run({ filePath: "sub" + String.fromCharCode(92) + "x.tsx" });
   assert.ok(errors.some((e) => /components\/x/.test(e) && /backslash/.test(e)));
 });
+
+const HDR = "// Source: https://example.com/x.tsx\n// Upstream: a/b@" + "a".repeat(40) + "\n// Copied: 2026-11-03\n// Licence: MIT (see THIRD_PARTY.md)\n";
+
+test("vendored file with its header before the imports is an error", () => {
+  const errors = run({ source: HDR + '"use client";\nimport React from "react";\nexport const x = React;\n' });
+  assert.equal(errors.length, 1);
+  assert.match(errors[0], /components\/x/);
+  assert.match(errors[0], /after the imports/);
+  assert.match(errors[0], /strips/);
+});
+
+test("vendored file with its header after the imports passes", () => {
+  assert.deepEqual(run({ source: '"use client";\nimport React from "react";\n' + HDR + "export const x = React;\n" }), []);
+  assert.deepEqual(run({ source: 'import React from "react";\n\n' + HDR + "export const x = React;\n" }), []);
+});
+
+test("vendored file missing the Licence line is an error", () => {
+  const errors = run({ source: 'import React from "react";\n// Source: https://example.com/x.tsx\nexport const x = React;\n' });
+  assert.equal(errors.length, 1);
+  assert.match(errors[0], /Licence/);
+});
+
+test("house file without a header passes", () => {
+  assert.deepEqual(run({ source: "// a plain comment\nexport const x = 1;\n" }), []);
+});

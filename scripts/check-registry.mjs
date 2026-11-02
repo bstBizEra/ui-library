@@ -54,6 +54,13 @@ export function checkRegistry(rootDir) {
           continue;
         }
         const src = fs.readFileSync(file, "utf8");
+        if (/^\/\/ Source:/m.test(src)) {
+          const first = src.split(/\r?\n/).find((l) => l.trim() !== "");
+          if (/^\s*(\/\/|\/\*|\*)/.test(first)) {
+            err("header comment before the first statement", `in "${f.path}": the header must come after the imports because the shadcn CLI strips leading comments`);
+          }
+          if (!/^\/\/ Licence:/m.test(src)) err("vendored file lacks", `a "// Licence:" line in "${f.path}"`);
+        }
         for (const [, spec] of src.matchAll(IMPORT_RE)) {
           if (spec.startsWith(".") || spec.startsWith("@/")) continue;
           const name = pkgName(spec);
