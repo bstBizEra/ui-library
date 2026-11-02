@@ -6,9 +6,14 @@
       "type": "registry:component",
       "title": "Theme Toggle",
       "description": "Controlled three-way theme switch (system, light, dark) with accessible icon buttons.",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
-        { "path": "theme-toggle.tsx", "type": "registry:component" }
+        {
+          "path": "theme-toggle.tsx",
+          "type": "registry:component"
+        }
       ]
     },
     {
@@ -16,13 +21,37 @@
       "type": "registry:component",
       "title": "Locale Switcher",
       "description": "Controlled language dropdown with flag icons that closes after a pick.",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "dropdown-menu",
         "bstBizEra/ui-library/icons/flag#3d3c181096df55c187c3a153ef26af85f012727d"
       ],
       "files": [
-        { "path": "locale-switcher.tsx", "type": "registry:component" }
+        {
+          "path": "locale-switcher.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "components/dropzone",
+      "type": "registry:component",
+      "title": "Dropzone",
+      "description": "Use when a form needs file upload by drag and drop or click: keyboard-openable, shows accepted types and sizes, and reports rejected files through an onError callback you render as text. Vendored from Kibo UI (shadcnblocks/kibo, MIT).",
+      "dependencies": [
+        "react-dropzone",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "dropzone.tsx",
+          "type": "registry:component"
+        }
       ]
     }
   ]
