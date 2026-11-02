@@ -24,6 +24,10 @@ Verified 2026-11-03 against `f732fd2` (library-default modal menu): Base UI ✓,
 
 Verified 2026-11-03: Base UI ✓, Radix ✓. `aria-pressed` follows the chosen mode in both apps. Detector: clean. Lighthouse accessibility (desktop): navigation light 100, dark 100 in both apps.
 
+### icons/animated-search
+
+Vendored from lucide-animated (`pqoqubbw/icons`, MIT; see `THIRD_PARTY.md`) because upstream's GitHub registry.json lists `search.tsx` but the file is at `icons/search.tsx`, so `pqoqubbw/icons/search#<sha>` cannot be installed. Verified 2026-11-03 against `72f7f1d`: Base UI ✓, Radix ✓ (installed by GitHub address, `npm run build` passes in both). Rendered in an outline `Button` labelled "Search" (icon `aria-hidden`); the icon animates on hover of the whole button (via the `SearchIconHandle` ref). Detector: clean. Lighthouse accessibility (desktop): navigation light 100, dark 100 in both apps. Note: the animation does not honour `prefers-reduced-motion` (upstream; P2).
+
 ## License
 
 MIT
