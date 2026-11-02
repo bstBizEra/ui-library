@@ -14,7 +14,7 @@ Installed from `f732fd2` in two fresh Next.js apps (shadcn `base-nova` on Base U
 
 ### icons/flag and components/locale-switcher
 
-Verified 2026-11-03: Base UI ✓, Radix ✓. Menu opens, picking ລາວ updates the label and closes the menu, ArrowDown + Enter picks, ລາວ not clipped in light and dark. Impeccable audit: no P0/P1. Detector: clean. Lighthouse accessibility (desktop): navigation light 100, dark 100; menu open (snapshot) Base UI light 100, dark 100. Radix with the menu open scores 94 in light and dark: `aria-hidden-focus` on `main` (Radix's modal menu hides the page, trigger included) plus `landmark-one-main`, a knock-on of that `aria-hidden`.
+Verified 2026-11-03 against `38cc504` (`modal={false}`): Base UI ✓, Radix ✓. Menu opens, picking ລາວ updates the label and closes the menu, ArrowDown + Enter picks, Escape closes and returns focus to the trigger, ລາວ not clipped in light and dark. Impeccable audit: no P0/P1. Detector: clean. Lighthouse accessibility (desktop): Radix 100 in all four runs (navigation light/dark, menu-open snapshot light/dark). Base UI navigation light/dark 100, but with the menu open 96 in light and dark: `aria-hidden-focus` on Base UI's own focus-guard spans (`aria-hidden` with `tabindex=0`) that a non-modal menu adds. With `modal` left on (`f732fd2`) the result was the reverse: Base UI 100, Radix 94.
 
 ### components/theme-toggle
 
