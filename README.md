@@ -36,6 +36,21 @@ Vendored from Motion Primitives (`ibelick/motion-primitives`, MIT; see `THIRD_PA
 
 Vendored from Tailark (`tailark/blocks`, MIT; see `THIRD_PARTY.md`), dusk hero one. Local changes: header, brand logo strip and screenshot removed (neutral placeholder instead), `<main>` became `<section>`, and buttons use `buttonVariants` on `<a>` so one file works on both bases. Needs the `button` item (built in) and `lucide-react`. Verified 2026-11-03 against `a10114e`: Base UI ✓, Radix ✓ (installed by GitHub address, `npm run build` passes in both; rendered at `/hero`). Impeccable audit 17/20: P0 0, P1 0, P2 1 (badge arrow hover ignores reduced motion), P3 4. Detector: clean. Lighthouse accessibility (desktop, includes the colour-contrast audit, which passed): navigation light 100, dark 100 in both apps. At 360 px wide there is no horizontal scroll; the buttons are 32 px tall.
 
+### components/dropzone
+
+Vendored from Kibo UI (`shadcnblocks/kibo`, MIT; see `THIRD_PARTY.md`) with one local change: `getRootProps({ role: "button" })`, because react-dropzone's default `role="presentation"` on the focusable root fails axe `presentation-role-conflict` (Lighthouse accessibility 99 before the change, 100 after). Verified 2026-11-03 against `ec73b69`: Base UI ✓, Radix ✓ (installed by GitHub address, `npm run build` passes in both). Keyboard: Tab focuses the root and Enter and Space open the file picker (input `click()` called, real key presses, both apps). A rejected `.txt` against `image/png` shows "File type must be one of image/png, .png" as text. Impeccable audit 17/20: P0 0, P1 0, P2 2, P3 2. Detector: clean. Lighthouse accessibility (desktop): navigation light 100, dark 100; snapshot with the error on screen light 100, dark 100, in both apps. Known limit: the button's accessible name still starts with the file input's text ("file upload: No file chosen ..."); neither axe nor Lighthouse flags it, and it was not changed. Audit: `task-8-audit.md` (in the workflow repo).
+
+Usage: the component only calls `onError` for a rejected file, so render that message yourself:
+
+```tsx
+const [error, setError] = useState<string | null>(null)
+<Dropzone accept={{ "image/png": [".png"] }} onDrop={() => setError(null)} onError={(e) => setError(e.message)}>
+  <DropzoneEmptyState />
+  <DropzoneContent />
+</Dropzone>
+{error ? <p role="alert">{error}</p> : null}
+```
+
 ## License
 
 MIT
