@@ -1,15 +1,11 @@
 // Source: https://raw.githubusercontent.com/ibelick/motion-primitives/120f64f6ca60348e251f929e9c81f11ccbe45eda/components/core/text-effect.tsx
 // Upstream: ibelick/motion-primitives@120f64f6ca60348e251f929e9c81f11ccbe45eda
 // Copied: 2026-11-03
-// Local change: renders the text without animation when prefers-reduced-motion is set
+// Local change: renders the text without animation when prefers-reduced-motion is set (read in an effect, so the first client render matches the server HTML)
 // Licence: MIT (see THIRD_PARTY.md)
 'use client';
 import { cn } from '@/lib/utils';
-import {
-  AnimatePresence,
-  motion,
-  useReducedMotion,
-} from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import type {
   TargetAndTransition,
   Transition,
@@ -230,7 +226,15 @@ export function TextEffect({
   segmentTransition,
   style,
 }: TextEffectProps) {
-  const reduceMotion = useReducedMotion();
+  // useState(false) + effect, not useReducedMotion(): the server cannot know the preference, so the first client render must match the animated server HTML.
+  const [reduceMotion, setReduceMotion] = React.useState(false);
+  React.useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduceMotion(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
   if (reduceMotion) {
     const Tag = as as React.ElementType;
     return trigger ? (

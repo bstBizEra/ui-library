@@ -67,7 +67,7 @@ SOFTWARE.
 
 - Repo: https://github.com/ibelick/motion-primitives
 - Commit: 120f64f6ca60348e251f929e9c81f11ccbe45eda
-- Vendored: `components/core/text-effect.tsx` as `animation/text-effect.tsx` (header comment added; local change: when `prefers-reduced-motion` is set, `useReducedMotion()` makes it render the text in the same element and className without animation)
+- Vendored: `components/core/text-effect.tsx` as `animation/text-effect.tsx` (header comment added; local change: when `prefers-reduced-motion` is set, `useReducedMotion()` makes it render the text in the same element and className without animation; the preference is read in an effect so the first client render matches the server HTML)
 - Licence: MIT
 
 ```text
