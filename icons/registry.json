@@ -14,9 +14,12 @@
       "name": "icons/animated-search",
       "type": "registry:ui",
       "title": "Animated Search",
-      "description": "Animated search icon (lucide-animated); use for a search button or field that needs a small hover cue. Pointer to pqoqubbw/icons (MIT).",
-      "registryDependencies": [
-        "pqoqubbw/icons/search#4662fff2b60fdcf4751b32013606756caf7c4c26"
+      "description": "Animated search icon (lucide-animated); use for a search button or field that needs a small hover cue.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        { "path": "animated-search.tsx", "type": "registry:ui" }
       ]
     }
   ]
