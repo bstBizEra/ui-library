@@ -1,7 +1,7 @@
 // Source: https://raw.githubusercontent.com/shadcnblocks/kibo/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/dropzone/index.tsx
 // Upstream: shadcnblocks/kibo@3d63cdb15b79d972e3dc38a10997987672f9b263
 // Copied: 2026-11-03
-// Local change: passes role="button" to getRootProps so the root is not role="presentation" (axe presentation-role-conflict on a focusable button)
+// Local change: (1) passes role="button" to getRootProps so the root is not role="presentation" (axe presentation-role-conflict on a focusable button); (2) aria-hidden="true" on the inner file input so the button name comes from its visible content
 // Licence: MIT (see THIRD_PARTY.md)
 "use client";
 
@@ -97,7 +97,7 @@ export const Dropzone = ({
         variant="outline"
         {...getRootProps({ role: "button" })}
       >
-        <input {...getInputProps()} disabled={disabled} />
+        <input {...getInputProps()} aria-hidden="true" disabled={disabled} />
         {children}
       </Button>
     </DropzoneContext.Provider>
