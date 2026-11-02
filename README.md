@@ -10,6 +10,10 @@ Items are named `<layer>/<item>` (for example `components/theme-toggle`). Pin a 
 
 Items expect shadcn's `@/lib/utils` (`cn`) from `shadcn init`.
 
+## Install the skill
+
+On another machine or in a cloud session, install the agent skill with `npx skills add bstBizEra/ui-library --skill ui-library -g`.
+
 ## Adding an item
 
 1. Put the file in its layer folder (`icons/`, `components/`, `animation/`, `blocks/`) and add an entry to that layer's `registry.json`. Paths are relative to the layer file. The `description` starts with "Use when" wording: it becomes the catalogue line.
@@ -18,11 +22,13 @@ Items expect shadcn's `@/lib/utils` (`cn`) from `shadcn init`.
 
 ## Releasing
 
-1. `node scripts/set-ref.mjs vX.Y.Z` pins same-repo dependencies to the new tag.
-2. `node scripts/catalog.mjs vX.Y.Z` regenerates `CATALOG.md`. `npm run check` compares it against the literal tag in `package.json` (`v1.0.0`): change it there for a new release.
-3. `npm test`, `npm run check`, `npx shadcn@latest registry validate`.
-4. Commit `release: vX.Y.Z`.
-5. Tag and push (`git tag vX.Y.Z && git push origin main vX.Y.Z`). This step needs the owner's OK.
+1. Update the tag by hand in `AGENTS.md`, `skills/ui-library/SKILL.md`, the install examples in `README.md`, and the `check` script in `package.json` (both places). `npm run check` runs `scripts/check-tag.mjs` and fails, naming the file, if one of them still has another tag.
+2. `node scripts/set-ref.mjs vX.Y.Z` pins same-repo dependencies to the new tag.
+3. `node scripts/catalog.mjs vX.Y.Z` regenerates `CATALOG.md`.
+4. `npm test`, `npm run check`, `npx shadcn@latest registry validate`.
+5. Commit `release: vX.Y.Z`.
+6. Tag and push (`git tag vX.Y.Z && git push origin main vX.Y.Z`). This step needs the owner's OK.
+7. Reinstall the global skill from the new tag (see "Install the skill").
 
 ## Verification
 
