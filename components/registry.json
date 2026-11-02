@@ -10,6 +10,20 @@
       "files": [
         { "path": "theme-toggle.tsx", "type": "registry:component" }
       ]
+    },
+    {
+      "name": "components/locale-switcher",
+      "type": "registry:component",
+      "title": "Locale Switcher",
+      "description": "Controlled language dropdown with flag icons that closes after a pick.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "dropdown-menu",
+        "bstBizEra/ui-library/icons/flag#3d3c181096df55c187c3a153ef26af85f012727d"
+      ],
+      "files": [
+        { "path": "locale-switcher.tsx", "type": "registry:component" }
+      ]
     }
   ]
 }
