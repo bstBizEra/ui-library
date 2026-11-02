@@ -9,7 +9,11 @@ const TAG = /^v\d+\.\d+\.\d+$/;
 const isBuiltIn = (d) => !/[/#]/.test(d) && !d.startsWith("@") && !d.includes("://");
 
 function isPinned(d) {
-  if (d.startsWith("https://")) return /@\d|\/v\d/.test(new URL(d).pathname);
+  if (d.startsWith("https://")) {
+    const u = new URL(d);
+    if (u.hostname === "raw.githubusercontent.com") return /^\/[^/]+\/[^/]+\/[0-9a-f]{40}\//.test(u.pathname);
+    return /@\d|\/v\d/.test(u.pathname);
+  }
   const ref = d.split("#")[1];
   return ref !== undefined && (SHA.test(ref) || TAG.test(ref));
 }

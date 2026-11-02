@@ -38,6 +38,12 @@ test("versioned https URL passes, unversioned fails", () => {
   assert.equal(run({ registryDependencies: ["https://x.dev/r/button.json"] }).length, 1);
 });
 
+test("raw.githubusercontent URL passes only when pinned to a full SHA", () => {
+  const u = (ref) => `https://raw.githubusercontent.com/a/b/${ref}/public/c/x.json`;
+  assert.deepEqual(run({ registryDependencies: [u("a".repeat(40))] }), []);
+  assert.equal(run({ registryDependencies: [u("main")] }).length, 1);
+});
+
 test('built-in name "dropdown-menu" passes', () => {
   assert.deepEqual(run({ registryDependencies: ["dropdown-menu"] }), []);
 });

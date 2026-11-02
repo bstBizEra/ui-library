@@ -2,5 +2,5 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "ui-library",
   "homepage": "https://github.com/bstBizEra/ui-library",
-  "include": ["components/registry.json", "icons/registry.json"]
+  "include": ["components/registry.json", "icons/registry.json", "animation/registry.json"]
 }

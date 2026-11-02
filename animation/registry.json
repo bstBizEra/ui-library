@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "animation/text-effect",
+      "type": "registry:ui",
+      "title": "Text Effect",
+      "description": "Per-word, per-character or per-line text reveal animation (Motion Primitives); use for a headline or short line that should animate in. Pointer to ibelick/motion-primitives (MIT) at a pinned commit. Does not honour prefers-reduced-motion.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/ibelick/motion-primitives/120f64f6ca60348e251f929e9c81f11ccbe45eda/public/c/text-effect.json"
+      ]
+    }
+  ]
+}
