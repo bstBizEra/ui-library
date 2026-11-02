@@ -10,6 +10,7 @@ A shadcn source registry: `bstBizEra/ui-library`.
 ## Rules
 
 1. Read `CATALOG.md` first. It lists every item with a "Use when" line, the install command and the licence.
+   The catalogue is `CATALOG.md` in the repo: https://github.com/bstBizEra/ui-library/blob/v1.0.0/CATALOG.md (read it with `gh api repos/bstBizEra/ui-library/contents/CATALOG.md?ref=v1.0.0 -H "Accept: application/vnd.github.raw"`, or a web fetch), or `D:/bst_AgentsWorkspace/Tools/ui-library/CATALOG.md` on the owner's PC.
 2. If an item fits, install it with the pinned address. Never hand-write a piece the catalogue lists.
    `npx shadcn@latest add bstBizEra/ui-library/<item>#v1.0.0`
    (for example `bstBizEra/ui-library/components/theme-toggle#v1.0.0`). Always keep the `#<tag>`.
