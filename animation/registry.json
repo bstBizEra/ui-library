@@ -5,7 +5,7 @@
       "name": "animation/text-effect",
       "type": "registry:ui",
       "title": "Text Effect",
-      "description": "Per-word, per-character or per-line text reveal animation (Motion Primitives); use for a headline or short line that should animate in and show plainly when the user prefers reduced motion. Vendored from ibelick/motion-primitives (MIT) with a reduced-motion change.",
+      "description": "Use when a headline or short line should reveal per word, character or line and show plainly when the user prefers reduced motion (Motion Primitives). Vendored from ibelick/motion-primitives (MIT) with a reduced-motion change.",
       "dependencies": [
         "motion@^14"
       ],

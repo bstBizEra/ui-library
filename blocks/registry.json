@@ -5,7 +5,7 @@
       "name": "blocks/hero-centered",
       "type": "registry:component",
       "title": "Hero Centered",
-      "description": "Centred landing hero (Tailark dusk) with badge link, headline, text, two buttons and a screenshot frame; use for the top section of a marketing page. Vendored from tailark/blocks (MIT) with the header, logos and image removed.",
+      "description": "Use when the top section of a marketing page needs a centred hero with badge link, headline, text, two buttons and a screenshot frame (Tailark dusk; needs Tailwind v4). Vendored from tailark/blocks (MIT) with the header, logos and image removed.",
       "registryDependencies": [
         "button"
       ],

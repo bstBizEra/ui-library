@@ -5,7 +5,7 @@
       "name": "components/theme-toggle",
       "type": "registry:component",
       "title": "Theme Toggle",
-      "description": "Controlled three-way theme switch (system, light, dark) with accessible icon buttons.",
+      "description": "Use when an app needs a controlled three-way theme switch (system, light, dark) with accessible icon buttons.",
       "dependencies": [
         "lucide-react@^1"
       ],
@@ -20,7 +20,7 @@
       "name": "components/locale-switcher",
       "type": "registry:component",
       "title": "Locale Switcher",
-      "description": "Controlled language dropdown with flag icons that closes after a pick.",
+      "description": "Use when an app needs a controlled language dropdown with flag icons that closes after a pick.",
       "dependencies": [
         "lucide-react@^1"
       ],

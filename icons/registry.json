@@ -5,7 +5,7 @@
       "name": "icons/flag",
       "type": "registry:ui",
       "title": "Flag",
-      "description": "Inline SVG flag icons for English, Lao, Thai and Chinese locales.",
+      "description": "Use when a language picker or label needs inline SVG flag icons for English, Lao, Thai and Chinese.",
       "files": [
         { "path": "flag.tsx", "type": "registry:ui" }
       ]
@@ -14,7 +14,7 @@
       "name": "icons/animated-search",
       "type": "registry:ui",
       "title": "Animated Search",
-      "description": "Animated search icon (lucide-animated); use for a search button or field that needs a small hover cue.",
+      "description": "Use when a search button or field needs a small animated hover cue (lucide-animated search icon).",
       "dependencies": [
         "motion@^14"
       ],

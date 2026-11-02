@@ -8,28 +8,28 @@ Items expect shadcn's `@/lib/utils` (`cn`) from `shadcn init`. `lucide-react` is
 
 | Item | Kind | Use when | Install | Source | Licence |
 | --- | --- | --- | --- | --- | --- |
-| `components/theme-toggle` | house | Controlled three-way theme switch (system, light, dark) with accessible icon buttons. | `npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.0.0` | house | MIT (this repo) |
-| `components/locale-switcher` | house | Controlled language dropdown with flag icons that closes after a pick. | `npx shadcn@latest add bstBizEra/ui-library/components/locale-switcher#v1.0.0` | house | MIT (this repo) |
+| `components/theme-toggle` | house | Use when an app needs a controlled three-way theme switch (system, light, dark) with accessible icon buttons. | `npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.0.0` | house | MIT (this repo) |
+| `components/locale-switcher` | house | Use when an app needs a controlled language dropdown with flag icons that closes after a pick. | `npx shadcn@latest add bstBizEra/ui-library/components/locale-switcher#v1.0.0` | house | MIT (this repo) |
 | `components/dropzone` | vendored | Use when a form needs file upload by drag and drop or click: keyboard-openable, shows accepted types and sizes, and reports rejected files through an onError callback you render as text. Vendored from Kibo UI (shadcnblocks/kibo, MIT). | `npx shadcn@latest add bstBizEra/ui-library/components/dropzone#v1.0.0` | shadcnblocks/kibo@3d63cdb15b79d972e3dc38a10997987672f9b263 | MIT (see THIRD_PARTY.md) |
 
 ## icons
 
 | Item | Kind | Use when | Install | Source | Licence |
 | --- | --- | --- | --- | --- | --- |
-| `icons/flag` | house | Inline SVG flag icons for English, Lao, Thai and Chinese locales. | `npx shadcn@latest add bstBizEra/ui-library/icons/flag#v1.0.0` | house | MIT (this repo) |
-| `icons/animated-search` | vendored | Animated search icon (lucide-animated); use for a search button or field that needs a small hover cue. | `npx shadcn@latest add bstBizEra/ui-library/icons/animated-search#v1.0.0` | pqoqubbw/icons@4662fff2b60fdcf4751b32013606756caf7c4c26 | MIT (see THIRD_PARTY.md) |
+| `icons/flag` | house | Use when a language picker or label needs inline SVG flag icons for English, Lao, Thai and Chinese. | `npx shadcn@latest add bstBizEra/ui-library/icons/flag#v1.0.0` | house | MIT (this repo) |
+| `icons/animated-search` | vendored | Use when a search button or field needs a small animated hover cue (lucide-animated search icon). | `npx shadcn@latest add bstBizEra/ui-library/icons/animated-search#v1.0.0` | pqoqubbw/icons@4662fff2b60fdcf4751b32013606756caf7c4c26 | MIT (see THIRD_PARTY.md) |
 
 ## animation
 
 | Item | Kind | Use when | Install | Source | Licence |
 | --- | --- | --- | --- | --- | --- |
-| `animation/text-effect` | vendored | Per-word, per-character or per-line text reveal animation (Motion Primitives); use for a headline or short line that should animate in and show plainly when the user prefers reduced motion. Vendored from ibelick/motion-primitives (MIT) with a reduced-motion change. | `npx shadcn@latest add bstBizEra/ui-library/animation/text-effect#v1.0.0` | ibelick/motion-primitives@120f64f6ca60348e251f929e9c81f11ccbe45eda | MIT (see THIRD_PARTY.md) |
+| `animation/text-effect` | vendored | Use when a headline or short line should reveal per word, character or line and show plainly when the user prefers reduced motion (Motion Primitives). Vendored from ibelick/motion-primitives (MIT) with a reduced-motion change. | `npx shadcn@latest add bstBizEra/ui-library/animation/text-effect#v1.0.0` | ibelick/motion-primitives@120f64f6ca60348e251f929e9c81f11ccbe45eda | MIT (see THIRD_PARTY.md) |
 
 ## blocks
 
 | Item | Kind | Use when | Install | Source | Licence |
 | --- | --- | --- | --- | --- | --- |
-| `blocks/hero-centered` | vendored | Centred landing hero (Tailark dusk) with badge link, headline, text, two buttons and a screenshot frame; use for the top section of a marketing page. Vendored from tailark/blocks (MIT) with the header, logos and image removed. | `npx shadcn@latest add bstBizEra/ui-library/blocks/hero-centered#v1.0.0` | tailark/blocks@8139698115c1341bfd2e3e286c04bb4d8146f472 | MIT (see THIRD_PARTY.md) |
+| `blocks/hero-centered` | vendored | Use when the top section of a marketing page needs a centred hero with badge link, headline, text, two buttons and a screenshot frame (Tailark dusk; needs Tailwind v4). Vendored from tailark/blocks (MIT) with the header, logos and image removed. | `npx shadcn@latest add bstBizEra/ui-library/blocks/hero-centered#v1.0.0` | tailark/blocks@8139698115c1341bfd2e3e286c04bb4d8146f472 | MIT (see THIRD_PARTY.md) |
 
 ## Not in the library yet
 
