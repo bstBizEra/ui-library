@@ -3,9 +3,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const OWN = "bstBizEra/ui-library/";
+const VALID_REF = /^(v\d+\.\d+\.\d+|[0-9a-f]{40})$/;
+const USAGE = "usage: node scripts/set-ref.mjs <ref>   e.g. v1.0.0";
 
 // Pins every same-repo registry dependency to `ref`, so installing at a tag pulls its dependencies from that tag.
 export function setRef(rootDir, ref) {
+  if (!VALID_REF.test(ref)) throw new Error(`invalid ref "${ref}": expected a tag like v1.0.0 or a 40-hex SHA`);
   let changed = 0;
   const rewrite = (file) => {
     const json = JSON.parse(fs.readFileSync(file, "utf8"));
@@ -28,10 +31,10 @@ export function setRef(rootDir, ref) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const ref = process.argv[2];
-  if (!ref) {
-    console.error("usage: node scripts/set-ref.mjs <ref>   e.g. v1.0.0");
+  try {
+    console.log(`${setRef(process.cwd(), process.argv[2] ?? "").changed} entries changed`);
+  } catch (e) {
+    console.error(`${e.message}\n${USAGE}`);
     process.exit(1);
   }
-  console.log(`${setRef(process.cwd(), ref).changed} entries changed`);
 }
