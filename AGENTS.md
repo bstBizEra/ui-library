@@ -13,6 +13,8 @@ A shadcn source registry: `bstBizEra/ui-library`. Use it when you build or chang
 4. Installed files are yours: edit them in the project, not in this repo. Vendored items keep their header comment (source, licence).
 5. If nothing in the catalogue fits, check the "Not in the library yet" section of `CATALOG.md`, then write the piece in the project.
 
+On another machine or in a cloud session, install the agent skill with `npx skills add bstBizEra/ui-library --skill ui-library -g`.
+
 ## Adding an item to this repo
 
 Follow "Adding an item" and the entry checks in `README.md`: a layer folder (`icons/`, `components/`, `animation/`, `blocks/`), a `registry.json` entry with a "Use when" description, a header comment on vendored files, a `THIRD_PARTY.md` entry for third-party code, then `npm test`, `npm run check` and `npx shadcn@latest registry validate`. `CATALOG.md` is generated: run `node scripts/catalog.mjs <tag>`.
