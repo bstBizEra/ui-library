@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "icons/flag",
+      "type": "registry:ui",
+      "title": "Flag",
+      "description": "Inline SVG flag icons for English, Lao, Thai and Chinese locales.",
+      "files": [
+        { "path": "flag.tsx", "type": "registry:ui" }
+      ]
+    }
+  ]
+}
