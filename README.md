@@ -28,6 +28,14 @@ Verified 2026-11-03: Base UI ✓, Radix ✓. `aria-pressed` follows the chosen m
 
 Vendored from lucide-animated (`pqoqubbw/icons`, MIT; see `THIRD_PARTY.md`) because upstream's GitHub registry.json lists `search.tsx` but the file is at `icons/search.tsx`, so `pqoqubbw/icons/search#<sha>` cannot be installed. Verified 2026-11-03 against `72f7f1d`: Base UI ✓, Radix ✓ (installed by GitHub address, `npm run build` passes in both). Hover animation confirmed with a real pointer hover; the svg transform animated in both apps. Impeccable audit 18/20: P0 0, P1 0, P2 2, P3 1. Rendered in an outline `Button` labelled "Search" (icon `aria-hidden`); the icon animates on hover of the whole button (via the `SearchIconHandle` ref). Detector: clean. Lighthouse accessibility (desktop): navigation light 100, dark 100 in both apps. Open P2s: the animation does not honour `prefers-reduced-motion` (wrap the app in `<MotionConfig reducedMotion="user">`) and has no focus cue.
 
+### animation/text-effect
+
+Vendored from Motion Primitives (`ibelick/motion-primitives`, MIT; see `THIRD_PARTY.md`) with one local change: it renders plain text when `prefers-reduced-motion` is set, because upstream ignores it. Verified 2026-11-03 against `a10114e`: Base UI ✓, Radix ✓ (installed by GitHub address, `npm run build` passes in both; the install did not touch `globals.css`). Browser check with emulated reduced motion: `no-preference` animates (per-word opacity 0, then staggered to 1 over about 0.7 s); `reduce` renders `<h2 class="...">text</h2>` with no child elements at opacity 1, in both apps. Impeccable audit 18/20: P0 0, P1 0, P2 1, P3 2 (server HTML starts hidden until hydration). Detector: clean. Lighthouse accessibility (desktop): navigation light 100, dark 100 in both apps. Audit: `task-7-audit-text-effect.md` (in the workflow repo).
+
+### blocks/hero-centered
+
+Vendored from Tailark (`tailark/blocks`, MIT; see `THIRD_PARTY.md`), dusk hero one. Local changes: header, brand logo strip and screenshot removed (neutral placeholder instead), `<main>` became `<section>`, and buttons use `buttonVariants` on `<a>` so one file works on both bases. Needs the `button` item (built in) and `lucide-react`. Verified 2026-11-03 against `a10114e`: Base UI ✓, Radix ✓ (installed by GitHub address, `npm run build` passes in both; rendered at `/hero`). Impeccable audit 17/20: P0 0, P1 0, P2 1 (badge arrow hover ignores reduced motion), P3 4. Detector: clean. Lighthouse accessibility (desktop, includes the colour-contrast audit, which passed): navigation light 100, dark 100 in both apps. At 360 px wide there is no horizontal scroll; the buttons are 32 px tall.
+
 ## License
 
 MIT
