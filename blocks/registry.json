@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "blocks/hero-centered",
+      "type": "registry:component",
+      "title": "Hero Centered",
+      "description": "Centred landing hero (Tailark dusk) with badge link, headline, text, two buttons and a screenshot frame; use for the top section of a marketing page. Vendored from tailark/blocks (MIT) with the header, logos and image removed.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "hero-centered.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
