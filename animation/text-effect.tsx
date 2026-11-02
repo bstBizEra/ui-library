@@ -1,9 +1,5 @@
-// Source: https://raw.githubusercontent.com/ibelick/motion-primitives/120f64f6ca60348e251f929e9c81f11ccbe45eda/components/core/text-effect.tsx
-// Upstream: ibelick/motion-primitives@120f64f6ca60348e251f929e9c81f11ccbe45eda
-// Copied: 2026-11-03
-// Local change: renders the text without animation when prefers-reduced-motion is set (read in an effect, so the first client render matches the server HTML)
-// Licence: MIT (see THIRD_PARTY.md)
 'use client';
+
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'motion/react';
 import type {
@@ -13,6 +9,12 @@ import type {
   Variants,
 } from 'motion/react'
 import React from 'react';
+
+// Source: https://raw.githubusercontent.com/ibelick/motion-primitives/120f64f6ca60348e251f929e9c81f11ccbe45eda/components/core/text-effect.tsx
+// Upstream: ibelick/motion-primitives@120f64f6ca60348e251f929e9c81f11ccbe45eda
+// Copied: 2026-11-03
+// Local change: renders the text without animation when prefers-reduced-motion is set (read in an effect, so the first client render matches the server HTML)
+// Licence: MIT (see THIRD_PARTY.md)
 
 export type PresetType = 'blur' | 'fade-in-blur' | 'scale' | 'fade' | 'slide';
 

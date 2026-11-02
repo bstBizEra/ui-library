@@ -1,3 +1,7 @@
+import { ArrowRight } from "lucide-react"
+
+import { buttonVariants } from "@/components/ui/button"
+
 // Source: https://github.com/tailark/blocks/blob/8139698115c1341bfd2e3e286c04bb4d8146f472/registry/bases/base/dusk/blocks/hero-section/one/hero-section.tsx
 // Upstream: tailark/blocks@8139698115c1341bfd2e3e286c04bb4d8146f472
 // Copied: 2026-11-03
@@ -5,9 +9,6 @@
 // Local changes: dropped the header, the brand logo strip and the next/link, next/image imports;
 // the Base UI-only Button `render` prop became buttonVariants on plain <a> so it works on Base UI and Radix;
 // the screenshot is a neutral placeholder; <main> became <section>.
-import { ArrowRight } from "lucide-react"
-
-import { buttonVariants } from "@/components/ui/button"
 
 export default function HeroCentered() {
   return (

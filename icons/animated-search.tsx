@@ -1,7 +1,3 @@
-// Source: https://github.com/pqoqubbw/icons/blob/4662fff2b60fdcf4751b32013606756caf7c4c26/icons/search.tsx
-// Upstream: pqoqubbw/icons@4662fff2b60fdcf4751b32013606756caf7c4c26
-// Copied: 2026-11-03
-// Licence: MIT (see THIRD_PARTY.md)
 "use client";
 
 import { motion, useAnimation } from "motion/react";
@@ -9,6 +5,11 @@ import type { HTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef } from "react";
 
 import { cn } from "@/lib/utils";
+
+// Source: https://github.com/pqoqubbw/icons/blob/4662fff2b60fdcf4751b32013606756caf7c4c26/icons/search.tsx
+// Upstream: pqoqubbw/icons@4662fff2b60fdcf4751b32013606756caf7c4c26
+// Copied: 2026-11-03
+// Licence: MIT (see THIRD_PARTY.md)
 
 export interface SearchIconHandle {
   startAnimation: () => void;

@@ -1,8 +1,3 @@
-// Source: https://raw.githubusercontent.com/shadcnblocks/kibo/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/dropzone/index.tsx
-// Upstream: shadcnblocks/kibo@3d63cdb15b79d972e3dc38a10997987672f9b263
-// Copied: 2026-11-03
-// Local change: (1) passes role="button" to getRootProps so the root is not role="presentation" (axe presentation-role-conflict on a focusable button); (2) aria-hidden="true" on the inner file input so the button name comes from its visible content; (3) group on the root and group-hover:text-foreground on the three text-muted-foreground captions so they stay readable on the hovered button (4.34:1 before)
-// Licence: MIT (see THIRD_PARTY.md)
 "use client";
 
 import { UploadIcon } from "lucide-react";
@@ -12,6 +7,12 @@ import type { DropEvent, DropzoneOptions, FileRejection } from "react-dropzone";
 import { useDropzone } from "react-dropzone";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+// Source: https://raw.githubusercontent.com/shadcnblocks/kibo/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/dropzone/index.tsx
+// Upstream: shadcnblocks/kibo@3d63cdb15b79d972e3dc38a10997987672f9b263
+// Copied: 2026-11-03
+// Local change: (1) passes role="button" to getRootProps so the root is not role="presentation" (axe presentation-role-conflict on a focusable button); (2) aria-hidden="true" on the inner file input so the button name comes from its visible content; (3) group on the root and group-hover:text-foreground on the three text-muted-foreground captions so they stay readable on the hovered button (4.34:1 before)
+// Licence: MIT (see THIRD_PARTY.md)
 
 type DropzoneContextType = {
   src?: File[];

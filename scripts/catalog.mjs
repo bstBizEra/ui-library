@@ -20,10 +20,10 @@ const NOT_YET = [
 
 const cell = (s) => String(s ?? "").replace(/\|/g, "\\|").replace(/\s+/g, " ").trim();
 
-// Reads the header comment lines (// Key: value) at the top of an item file.
+// Reads the header comment lines (// Key: value); they sit after the import block, so scan the whole file.
 function header(file) {
   const out = {};
-  for (const line of fs.readFileSync(file, "utf8").split(/\r?\n/).slice(0, 12)) {
+  for (const line of fs.readFileSync(file, "utf8").split(/\r?\n/)) {
     const m = line.match(/^\/\/\s*(Source|Upstream|Licence):\s*(.+)$/);
     if (m) out[m[1]] = m[2];
   }
