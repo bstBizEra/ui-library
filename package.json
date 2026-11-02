@@ -1,0 +1,9 @@
+{
+  "name": "ui-library",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/check-registry.mjs",
+    "test": "node --test scripts/*.test.mjs"
+  }
+}
