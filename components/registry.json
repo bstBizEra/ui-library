@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "components/theme-toggle",
+      "type": "registry:component",
+      "title": "Theme Toggle",
+      "description": "Controlled three-way theme switch (system, light, dark) with accessible icon buttons.",
+      "dependencies": ["lucide-react"],
+      "files": [
+        { "path": "theme-toggle.tsx", "type": "registry:component" }
+      ]
+    }
+  ]
+}
