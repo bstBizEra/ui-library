@@ -101,7 +101,7 @@ app/page.tsx
 - Source: Kibo UI dropzone, https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/dropzone/index.tsx
 - Repo: https://github.com/shadcnblocks/kibo
 - Commit: 3d63cdb15b79d972e3dc38a10997987672f9b263
-- Vendored: `packages/dropzone/index.tsx` as `components/dropzone.tsx` (header comment added; local changes: (1) `getRootProps({ role: "button" })` instead of `getRootProps()`, because react-dropzone defaults the root to `role="presentation"`, which on this focusable button fails axe presentation-role-conflict and Lighthouse accessibility; (2) `aria-hidden="true"` on the inner file input, so the button's accessible name comes from its visible content instead of "file upload: No file chosen")
+- Vendored: `packages/dropzone/index.tsx` as `components/dropzone.tsx` (header comment added; local changes: (1) `getRootProps({ role: "button" })` instead of `getRootProps()`, because react-dropzone defaults the root to `role="presentation"`, which on this focusable button fails axe presentation-role-conflict and Lighthouse accessibility; (2) `aria-hidden="true"` on the inner file input, so the button's accessible name comes from its visible content instead of "file upload: No file chosen"; (3) `group` on the root and `group-hover:text-foreground` on the three `text-muted-foreground` captions, so they stay readable on the hovered button: `hover:bg-muted` made them 4.34:1)
 - Licence: MIT
 
 ```text

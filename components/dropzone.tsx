@@ -1,7 +1,7 @@
 // Source: https://raw.githubusercontent.com/shadcnblocks/kibo/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/dropzone/index.tsx
 // Upstream: shadcnblocks/kibo@3d63cdb15b79d972e3dc38a10997987672f9b263
 // Copied: 2026-11-03
-// Local change: (1) passes role="button" to getRootProps so the root is not role="presentation" (axe presentation-role-conflict on a focusable button); (2) aria-hidden="true" on the inner file input so the button name comes from its visible content
+// Local change: (1) passes role="button" to getRootProps so the root is not role="presentation" (axe presentation-role-conflict on a focusable button); (2) aria-hidden="true" on the inner file input so the button name comes from its visible content; (3) group on the root and group-hover:text-foreground on the three text-muted-foreground captions so they stay readable on the hovered button (4.34:1 before)
 // Licence: MIT (see THIRD_PARTY.md)
 "use client";
 
@@ -88,7 +88,7 @@ export const Dropzone = ({
     >
       <Button
         className={cn(
-          "relative h-auto w-full flex-col overflow-hidden p-8",
+          "group relative h-auto w-full flex-col overflow-hidden p-8",
           isDragActive && "outline-none ring-1 ring-ring",
           className
         )}
@@ -147,7 +147,7 @@ export const DropzoneContent = ({
             )} and ${src.length - maxLabelItems} more`
           : new Intl.ListFormat("en").format(src.map((file) => file.name))}
       </p>
-      <p className="w-full text-wrap text-muted-foreground text-xs">
+      <p className="w-full text-wrap text-muted-foreground group-hover:text-foreground text-xs">
         Drag and drop or click to replace
       </p>
     </div>
@@ -196,11 +196,11 @@ export const DropzoneEmptyState = ({
       <p className="my-2 w-full truncate text-wrap font-medium text-sm">
         Upload {maxFiles === 1 ? "a file" : "files"}
       </p>
-      <p className="w-full truncate text-wrap text-muted-foreground text-xs">
+      <p className="w-full truncate text-wrap text-muted-foreground group-hover:text-foreground text-xs">
         Drag and drop or click to upload
       </p>
       {caption && (
-        <p className="text-wrap text-muted-foreground text-xs">{caption}.</p>
+        <p className="text-wrap text-muted-foreground group-hover:text-foreground text-xs">{caption}.</p>
       )}
     </div>
   );
