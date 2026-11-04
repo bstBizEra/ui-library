@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node scripts/check-registry.mjs && node scripts/catalog.mjs --check v1.0.2 && node scripts/check-tag.mjs v1.0.2",
+    "check": "node scripts/check-registry.mjs && node scripts/catalog.mjs --check v1.1.0 && node scripts/check-tag.mjs v1.1.0",
     "test": "node --test scripts/*.test.mjs"
   }
 }
