@@ -4,6 +4,11 @@ import { demos } from "@/demos"
 
 export const dynamicParams = false
 
+export async function generateMetadata({ params }: { params: Promise<{ theme: string; slug: string; state: string }> }) {
+  const { theme, slug, state } = await params
+  return { title: `${slug} (${state}, ${theme}) · ui-library sample` }
+}
+
 export function generateStaticParams() {
   return Object.entries(demos).flatMap(([slug, demo]) => demo.states.map((s) => ({ slug, state: s.id })))
 }

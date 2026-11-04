@@ -26,7 +26,8 @@ export default async function FrameLayout({
   return (
     <html
       lang="en"
-      className={cn("antialiased font-sans", theme === "dark" && "dark", geist.variable, fontMono.variable)}
+      // overflow-hidden: the portal sizes every frame to its content, so a sub-pixel overflow must not draw a scrollbar.
+      className={cn("antialiased font-sans overflow-hidden", theme === "dark" && "dark", geist.variable, fontMono.variable)}
       style={{ colorScheme: theme === "dark" ? "dark" : "light" }}
     >
       <body className="bg-background text-foreground">

@@ -45,7 +45,8 @@ const columns = column.columns([
     id: "status",
     header: ({ column }) => <DataTableColumnHeader column={column} label="Status" />,
     cell: ({ row }) => (
-      <Badge variant={row.original.status === "overdue" ? "destructive" : "outline"} className="capitalize">
+      // outline for every status: shadcn's destructive badge is 4.0:1 in light mode, under AA.
+      <Badge variant="outline" className="capitalize">
         {row.original.status}
       </Badge>
     ),

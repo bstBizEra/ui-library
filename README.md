@@ -86,6 +86,18 @@ const [error, setError] = useState<string | null>(null)
 {error ? <p role="alert">{error}</p> : null}
 ```
 
+### components/data-table
+
+Vendored from tablecn (`sadmann7/tablecn@2d74ac5`, MIT; see `THIRD_PARTY.md`): the 19 files of its `data-table` item for Base UI, with imports rewritten to shadcn aliases, `IconPlaceholder` resolved to lucide icons and `cn` from `@/lib/utils`. **Base UI only.** Upstream's GitHub `registry.json` carries only the Radix files: `npx shadcn@latest add sadmann7/tablecn/data-table#2d74ac5827aa7abf60e334759e38cf7cdcb24d54` installs and builds in a Radix app (checked 2026-11-04) and fails to typecheck in a Base UI app, which is why this item exists. Upstream's hosted Base UI build (`@tablecn/data-table`) is a newer, larger item with no commit to pin, and `table-cn.vercel.app` did not answer from this network.
+
+Verified 2026-11-04 against `216172b`: installed by GitHub address into a fresh Base UI app, all 19 installed files keep their `// Source:` and `// Licence:` lines, and `npm run build` passes with the table rendered on a page. In the portal: empty, filtered (`?status=overdue`, 16 rows, 2 pages) and paginated (`?page=3`, page 3 of 5) states render in light and dark; the toolbar, filters, column view and pager work by keyboard. Lighthouse accessibility (desktop) on the sample frame itself: navigation light 100, dark 100; snapshot with the Status filter open, light 100, dark 100. Detector: clean (only the waived Geist font finding).
+
+Usage:
+- Wrap the app in `NuqsAdapter` (`nuqs/adapters/next/app`): page, sorting and filters are read from the URL, so `?status=overdue&page=2` is a shareable view.
+- Give every column an explicit `id`. `useDataTable` skips columns without one for sorting and filtering, even when they have an accessor.
+- `mode: "client"` filters and pages the `data` you pass; the default `mode: "server"` expects `pageCount` and leaves the query to you.
+- Statuses as plain `outline` badges: shadcn's `destructive` badge is 4.0:1 in light mode, under AA.
+
 ## License
 
 MIT
