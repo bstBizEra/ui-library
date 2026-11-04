@@ -26,7 +26,7 @@
       ],
       "registryDependencies": [
         "dropdown-menu",
-        "bstBizEra/ui-library/icons/flag#v1.3.0"
+        "bstBizEra/ui-library/icons/flag#v1.4.0"
       ],
       "files": [
         {
@@ -198,7 +198,7 @@
       "description": "Use when a form takes or a screen shows a Lao phone number: +856 with the Lao flag in front, mobile grouped as 20 5551 2345 and landlines as 21 412 345, pasted +856, 856 or 020 forms accepted, E.164 (+8562055512345) handed back once complete, and a tap-to-call display.",
       "registryDependencies": [
         "input-group",
-        "bstBizEra/ui-library/icons/flag#v1.3.0"
+        "bstBizEra/ui-library/icons/flag#v1.4.0"
       ],
       "files": [
         {
@@ -207,6 +207,31 @@
         },
         {
           "path": "lao-phone/lao-phone.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "components/lao-region",
+      "type": "registry:component",
+      "title": "Lao Region",
+      "description": "Use when an address, booking or KYC form needs a Lao province and district: 17 provinces and Vientiane Capital with their 148 districts in Lao and English (National Geographic Department data, CC BY-IGO), searchable in either language or by common spellings like Luang Prabang, the district scoped to the chosen province, values as P-codes.",
+      "registryDependencies": [
+        "combobox",
+        "input-group",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "lao-region/lao-region-select.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lao-region/lao-regions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lao-region/lao-region-search.ts",
           "type": "registry:lib"
         }
       ]

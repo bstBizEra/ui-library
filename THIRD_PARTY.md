@@ -146,3 +146,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## components/lao-region (data)
+
+- Source: Lao People's Democratic Republic - Subnational Administrative Boundaries (COD-AB), version 01, https://data.humdata.org/dataset/cod-ab-lao
+- Originator: National Geographic Department (NGD), Lao PDR; contributed by OCHA Regional Office for Asia and the Pacific, published by OCHA Field Information Services and HDX
+- File: `lao_admin_boundaries.xlsx`, sheets `lao_admin1` and `lao_admin2`, downloaded 2026-11-04 (dataset reviewed 30 October 2025)
+- Vendored: province and district names (English and Lao) and P-codes, generated into `components/lao-region/lao-regions.ts`. Local changes: the `ມ.` (district) prefix dropped from Lao district names; ISO 3166-2 codes and common English spellings added from Wikipedia "Provinces of Laos" (CC BY-SA 4.0, facts only).
+- Licence: Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO 3.0), https://creativecommons.org/licenses/by/3.0/igo/. Attribution: "Source: National Geographic Department of Lao PDR, via OCHA and the Humanitarian Data Exchange."

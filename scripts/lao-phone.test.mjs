@@ -12,6 +12,13 @@ test("formats a landline as +856 <area> xxx xxx", () => {
   assert.equal(formatLaoPhone("21412345"), "+856 21 412 345");
 });
 
+test("keeps 030 numbers whole: 30 then 7 digits", () => {
+  assert.equal(formatLaoPhone("305551234"), "+856 30 555 1234");
+  assert.equal(laoPhoneDigits("030 555 1234"), "305551234");
+  assert.equal(toE164("305551234"), "+856305551234");
+  assert.equal(laoPhoneDigits("3055512345"), "305551234");
+});
+
 test("formats partial input as you type", () => {
   assert.equal(formatLaoPhoneNational("2"), "2");
   assert.equal(formatLaoPhoneNational("205"), "20 5");

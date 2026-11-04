@@ -6,6 +6,7 @@ import { RotateCcwIcon } from "lucide-react"
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@/components/dropzone"
 import { LakAmount, LakAmountInput } from "@/components/lak-amount"
 import { LaoPhoneInput } from "@/components/lao-phone-input"
+import { LaoRegionSelect, type LaoRegionValue } from "@/components/lao-region-select"
 import type { LakUnit } from "@/lib/lak"
 import { toE164 } from "@/lib/lao-phone"
 import { Label } from "@/components/ui/label"
@@ -26,6 +27,18 @@ export function LakAmountSample({ initial, max, unit }: { initial: number | null
       <p className="text-sm text-muted-foreground">
         {max !== undefined ? <>Limit <LakAmount amount={max} unit={unit} />. </> : null}
         Value: <code className="font-mono">{value === null ? "null" : value}</code>
+      </p>
+    </div>
+  )
+}
+
+export function LaoRegionSample({ initial, lang }: { initial: LaoRegionValue; lang?: "en" | "lo" }) {
+  const [value, setValue] = useState(initial)
+  return (
+    <div className="grid w-full max-w-xl gap-2">
+      <LaoRegionSelect value={value} onValueChange={setValue} lang={lang} />
+      <p className="text-sm break-all text-muted-foreground">
+        Value: <code className="font-mono">{JSON.stringify(value)}</code>
       </p>
     </div>
   )

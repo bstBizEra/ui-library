@@ -1,15 +1,22 @@
-// Lao phone numbers (+856). Mobile: 20 then 8 digits, written 20 5551 2345.
-// Landline: a 2-digit area code (21 Vientiane, 31, 41, …) then 6 digits, written 21 412 345.
-// shortcut: two shapes only, from the common published formats; add others (VoIP 30 numbers) when a project needs them.
+// Lao phone numbers (+856), after the national numbering plan registered with the ITU
+// (https://www.itu.int/oth/T0202000075/en, NAPT communication of 18.I.2011):
+// - mobile: 20 then an 8-digit subscriber number, written 20 5551 2345;
+// - landline: a 2-digit area code (21 Vientiane, 31, 41, 51, 54, 71, …) then 6 digits, written 21 412 345.
+// The ITU plan has no 030 range; 030 (prepaid wireless) is taken as 30 then 7 digits, written 30 555 1234,
+// from operator dialing guides, not an official source.
 
 const COUNTRY = "856"
 
-function isMobile(digits: string) {
-  return digits.startsWith("20")
+type Shape = { length: number; groups: number[] }
+
+function shapeOf(digits: string): Shape {
+  if (digits.startsWith("20")) return { length: 10, groups: [2, 4, 4] }
+  if (digits.startsWith("30")) return { length: 9, groups: [2, 3, 4] }
+  return { length: 8, groups: [2, 3, 3] }
 }
 
 function maxLength(digits: string) {
-  return isMobile(digits) ? 10 : 8
+  return shapeOf(digits).length
 }
 
 // The national digits from anything typed or pasted: drops spaces and punctuation,
@@ -22,7 +29,7 @@ export function laoPhoneDigits(text: string): string {
 }
 
 export function formatLaoPhoneNational(digits: string): string {
-  const groups = isMobile(digits) ? [2, 4, 4] : [2, 3, 3]
+  const { groups } = shapeOf(digits)
   const parts: string[] = []
   let at = 0
   for (const size of groups) {

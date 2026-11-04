@@ -58,3 +58,6 @@ next-env.d.ts
 /lib/lak.ts
 /components/lao-phone-input.tsx
 /lib/lao-phone.ts
+/components/lao-region-select.tsx
+/lib/lao-regions.ts
+/lib/lao-region-search.ts

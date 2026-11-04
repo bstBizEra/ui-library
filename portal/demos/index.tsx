@@ -11,6 +11,7 @@ import {
   DropzoneSample,
   LakAmountSample,
   LaoPhoneSample,
+  LaoRegionSample,
   LocaleSwitcherSample,
   SearchButtonSample,
   TextEffectSample,
@@ -128,6 +129,18 @@ export const demos: Record<string, Demo> = {
       },
     ],
     notes: ["Whole kip only: kip has no cents in practice, so dots and commas in pasted text are read as grouping."],
+  },
+  "lao-region": {
+    states: [
+      { id: "empty", label: "Empty", note: "District waits for a province", height: 136, render: () => <LaoRegionSample initial={{ province: null, district: null }} /> },
+      { id: "picked", label: "Picked", note: 'Luang Prabang, Luang Prabang district (P-codes LA06, LA0601)', height: 136, render: () => <LaoRegionSample initial={{ province: "LA06", district: "LA0601" }} /> },
+      { id: "lao", label: "Lao", note: 'lang="lo": Lao names lead, labels in Lao', height: 136, render: () => <LaoRegionSample initial={{ province: "LA01", district: "LA0101" }} lang="lo" /> },
+      { id: "province-only", label: "Province only", note: "Savannakhet; district still to pick", height: 136, render: () => <LaoRegionSample initial={{ province: "LA13", district: null }} /> },
+    ],
+    notes: [
+      "Data: National Geographic Department of Lao PDR, via OCHA and HDX (COD-AB v01), CC BY-IGO: keep the attribution in THIRD_PARTY.md. District counts match the Lao Statistics Bureau (2024).",
+      "English names follow the source's spelling (Louangphabang, Champasack); common spellings such as Luang Prabang and Champasak also match when typing.",
+    ],
   },
   "lao-phone": {
     states: [

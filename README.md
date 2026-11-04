@@ -3,7 +3,7 @@
 A shadcn source registry on GitHub. No build step: the CLI reads `registry.json` and its `include` entries.
 
 ```bash
-npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.3.0
+npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.4.0
 ```
 
 Items are named `<layer>/<item>` (for example `components/theme-toggle`). Pin a version with `#<ref>`. See `CATALOG.md` for every item, what it is for and its licence.
@@ -110,11 +110,36 @@ Not covered: screen readers, and phone keyboards (`inputMode="numeric"` is set b
 
 ### components/lao-phone
 
-House item. `LaoPhoneInput` (controlled; value is the national digits, `onValueChange(digits, e164)` hands back `+8562055512345` once the number is complete, `null` before) with the Lao flag and `+856` in front, and `LaoPhone` (a `tel:` link for a complete number). Logic in `lib/lao-phone.ts` (`formatLaoPhone`, `formatLaoPhoneNational`, `laoPhoneDigits`, `toE164`; unit tests in `scripts/lao-phone.test.mjs`). Needs `icons/flag`. Two shapes: mobile `20` + 8 digits, shown `20 5551 2345`; landline 2-digit area code + 6 digits, shown `21 412 345`. Other ranges (VoIP `30` numbers) are not handled; check the formats against the national numbering plan before relying on them for validation (not checked here).
+House item. `LaoPhoneInput` (controlled; value is the national digits, `onValueChange(digits, e164)` hands back `+8562055512345` once the number is complete, `null` before) with the Lao flag and `+856` in front, and `LaoPhone` (a `tel:` link for a complete number). Logic in `lib/lao-phone.ts` (`formatLaoPhone`, `formatLaoPhoneNational`, `laoPhoneDigits`, `toE164`; unit tests in `scripts/lao-phone.test.mjs`). Needs `icons/flag`.
+
+Number shapes, checked 2026-11-04 against the national numbering plan Lao PDR registered with the ITU ([ITU-T National Numbering Plans: Lao P.D.R.](https://www.itu.int/oth/T0202000075/en), the document posted 2011-02-15):
+- **Mobile:** `20` then an 8-digit subscriber number, shown `20 5551 2345`. The NAPT communication of 18 January 2011 records the change from 7 to 8 subscriber digits (for example `+856 20 5 XXX XXX` became `+856 20 55 XXX XXX`).
+- **Landline:** a 2-digit area code then 6 digits, shown `21 412 345`. The plan's 1994 communication lists six-digit numbers with area codes 21 (Vientiane), 31, 41, 51, 54 and 71. Any 2-digit code is accepted, since newer provincial codes (23, 34, 36, 38, 61, 64, 74, 81, 84, 86, 88 on Wikipedia's "Telephone numbers in Laos") are not in the ITU document.
+- **`030`:** not in the ITU plan. Wikipedia lists `030` as prepaid wireless without a length; operator dialing guides give 9 national digits. It is handled as `30` then 7 digits, shown `30 555 1234`, so such numbers are no longer cut at 8 digits. Treat this shape as unconfirmed until an official source lists it.
+
+The ITU document was last updated in 2011; the plan may have changed since without a new ITU filing.
 
 Verified 2026-11-04 in the portal (Base UI), with real keystrokes: typing `2055512345` shows `20 5551 2345` with E.164 `+8562055512345`; pasting `+856 20 5551 2345`, `856-20-5551-2345` and `020 5551 2345` all give the same digits, `(021) 412 345` gives `21 412 345`; an 11th mobile digit is refused; Backspace after the first `5` gives `20 5512 345` with the caret after `20`, and E.164 goes back to `null`. Lighthouse accessibility (desktop) on the empty, mobile, landline, incomplete and display frames: navigation light 100, dark 100 (10 runs). Detector: clean (source and rendered frames).
 
+The `030` shape (added 2026-11-04) is covered by unit tests only: `030 555 1234` gives `305551234`, shown `+856 30 555 1234`, with E.164 `+856305551234`.
+
 Not covered: screen readers, phone keyboards (`type="tel"` is set but not tried on a device), and browser autofill of `tel-national`.
+
+### components/lao-region
+
+House item. `LaoRegionSelect` (controlled; value is `{ province, district }` as P-codes such as `LA06` and `LA0601`, `null` when empty) shows two linked comboboxes: picking a province scopes and clears the district, and the district field is disabled until a province is chosen. `lang="lo"` puts Lao names and labels first; every option shows both names. Data in `lib/lao-regions.ts` (`LAO_PROVINCES`), search in `lib/lao-region-search.ts` (`matchesLaoRegion`, `normalizeLaoSearch`); unit tests in `scripts/lao-region.test.mjs`.
+
+**Data.** 17 provinces and Vientiane Capital with their 148 districts, from the National Geographic Department of Lao PDR via OCHA and HDX ([COD-AB v01](https://data.humdata.org/dataset/cod-ab-lao), reviewed by OCHA 30 October 2025), licence CC BY-IGO (attribution in `THIRD_PARTY.md`). The district count of every province matches the Lao Statistics Bureau's "Number of Districts, Villages and Households by Provinces" ([LAOSIS](https://laosis.lsb.gov.la/statHtml/statHtml.do?orgId=856&tblId=DT_YEARBOOK_B001&language=en), 2024). Another public dataset (`open-admin-data/laos-administrative-divisions`) has the same 148 total but 7 provinces with different counts, so it was not used. English names keep the source's spelling (Louangphabang, Champasack, Xaignabouly); each province also matches its common spelling (Luang Prabang, Champasak, Sainyabuli…) and its ISO 3166-2 code (LA-LP…), taken from Wikipedia's "Provinces of Laos". The source writes every Lao district name with the abbreviation `ມ.` (district); it is dropped here. Source spellings are kept as published, including oddities such as Vientiane Capital's "Mayparkngum" (Lao ປາກງື່ມ).
+
+**Search.** Case, spaces, hyphens and dots are ignored, and both ways of writing ຫຼ/ຫລ, ໜ/ຫນ and ໝ/ຫມ match, so `luang prabang`, `luangprabang`, `LA-LP`, `ຫຼວງພະບາງ` and `ຫລວງພະບາງ` all find Louangphabang.
+
+**shadcn combobox trigger.** shadcn's `ComboboxInput` draws its chevron as a button with no accessible name (axe `button-name`, Lighthouse 94). This item draws the same chevron itself, labelled ("Show provinces" / "ສະແດງແຂວງ") and out of the tab order; keyboard users open the list from the input with ArrowDown.
+
+Verified 2026-11-04 in the portal (Base UI), with real keystrokes: typing `luang prabang` lists only Louangphabang and Enter picks it (`{"province":"LA06","district":null}`); typing `ຫລວງ` lists the three ຫຼວງ provinces; in Luang Namtha, typing `nam` lists only Namtha; picking Savannakhet afterwards clears the district; the hidden form inputs carry `LA03` and the district code, not JSON. Lighthouse accessibility (desktop) on the empty, picked, Lao and province-only frames: navigation light 100, dark 100 (8 runs). Detector: clean (source and rendered frames).
+
+**Known issue (Base UI): list-open `aria-hidden-focus`.** While a list is open, Base UI's focus manager sets `aria-hidden` on everything outside the field and its list for a typeable combobox (`markOthers` with `ariaHidden: modal || isUntrappedTypeableCombobox`, whatever `modal` is set to), so another focusable field on the page is reported: with the district list open and a province already chosen, a snapshot scores 96; with the province list open and the district disabled, 100. Every shadcn Base UI combobox does this; waived with this reason, not filed upstream yet.
+
+Not covered: screen readers and phone keyboards; villages (the source has none at this level).
 
 ## License
 
