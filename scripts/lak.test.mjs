@@ -1,13 +1,20 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { caretAfterDigits, formatLak, formatLakDigits, parseLak } from "../components/lak-amount/lak.ts";
+import { caretAfterDigits, formatLak, formatLakDigits, lakUnitLabel, parseLak } from "../components/lak-amount/lak.ts";
 
 test("formats whole kip with grouping and the kip sign", () => {
   assert.equal(formatLak(1250000), "1,250,000 ₭");
   assert.equal(formatLak(0), "0 ₭");
   assert.equal(formatLakDigits(999), "999");
   assert.equal(formatLakDigits(1000), "1,000");
+});
+
+test("writes the unit in Lao on request", () => {
+  assert.equal(formatLak(1250000, "lao"), "1,250,000 ກີບ");
+  assert.equal(formatLak(1250000, "symbol"), "1,250,000 ₭");
+  assert.equal(lakUnitLabel("lao"), "ກີບ");
+  assert.equal(lakUnitLabel(), "₭");
 });
 
 test("parses typed or pasted text to whole kip", () => {

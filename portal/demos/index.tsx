@@ -6,9 +6,11 @@ import { Flag } from "@/components/ui/flag"
 
 import { DataTableSample } from "./data-table-sample"
 import { LakAmount } from "@/components/lak-amount"
+import { LaoPhone } from "@/components/lao-phone-input"
 import {
   DropzoneSample,
   LakAmountSample,
+  LaoPhoneSample,
   LocaleSwitcherSample,
   SearchButtonSample,
   TextEffectSample,
@@ -105,6 +107,7 @@ export const demos: Record<string, Demo> = {
       { id: "empty", label: "Empty", note: "value={null}; type or paste to fill", height: 120, render: () => <LakAmountSample initial={null} /> },
       { id: "filled", label: "Amount", note: "value={1250000}", height: 120, render: () => <LakAmountSample initial={1250000} /> },
       { id: "max", label: "With a limit", note: "max={5000000}: digits past the limit are refused", height: 140, render: () => <LakAmountSample initial={4800000} max={5000000} /> },
+      { id: "lao", label: "Lao unit", note: 'unit="lao": ກີບ instead of ₭', height: 120, render: () => <LakAmountSample initial={1250000} unit="lao" /> },
       {
         id: "display",
         label: "Display",
@@ -117,11 +120,42 @@ export const demos: Record<string, Demo> = {
                 <LakAmount amount={n} />
               </li>
             ))}
+            <li>
+              <LakAmount amount={1250000} unit="lao" />
+            </li>
           </ul>
         ),
       },
     ],
     notes: ["Whole kip only: kip has no cents in practice, so dots and commas in pasted text are read as grouping."],
+  },
+  "lao-phone": {
+    states: [
+      { id: "empty", label: "Empty", note: 'value=""', height: 120, render: () => <LaoPhoneSample initial="" /> },
+      { id: "mobile", label: "Mobile", note: 'value="2055512345"', height: 120, render: () => <LaoPhoneSample initial="2055512345" /> },
+      { id: "landline", label: "Landline", note: 'value="21412345" (Vientiane)', height: 120, render: () => <LaoPhoneSample initial="21412345" /> },
+      { id: "partial", label: "Incomplete", note: "E.164 stays null until the number is whole", height: 120, render: () => <LaoPhoneSample initial="20555" /> },
+      {
+        id: "display",
+        label: "Display",
+        note: "<LaoPhone digits={…} />: complete numbers are tel: links",
+        height: 96,
+        render: () => (
+          <ul className="grid gap-1 text-sm">
+            <li>
+              <LaoPhone digits="2055512345" />
+            </li>
+            <li>
+              <LaoPhone digits="21412345" />
+            </li>
+          </ul>
+        ),
+      },
+    ],
+    notes: [
+      "Two shapes: mobile 20 + 8 digits, landline area code + 6 digits. Other ranges (VoIP 30 numbers) are not handled yet.",
+      "Store the E.164 value (+8562055512345) that onValueChange hands back; it is null while the number is incomplete.",
+    ],
   },
   "data-table": {
     wide: true,

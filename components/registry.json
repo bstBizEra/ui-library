@@ -26,7 +26,7 @@
       ],
       "registryDependencies": [
         "dropdown-menu",
-        "bstBizEra/ui-library/icons/flag#v1.2.0"
+        "bstBizEra/ui-library/icons/flag#v1.3.0"
       ],
       "files": [
         {
@@ -176,7 +176,7 @@
       "name": "components/lak-amount",
       "type": "registry:component",
       "title": "LAK Amount",
-      "description": "Use when a form takes or a screen shows an amount in Lao kip: whole kip only, grouped as you type (1,250,000 ₭), pasted text like \"1.250.000 ₭\" accepted, with a max and a read-only display. Controlled; value is a number or null.",
+      "description": "Use when a form takes or a screen shows an amount in Lao kip: whole kip only, grouped as you type (1,250,000 ₭), pasted text like \"1.250.000 ₭\" accepted, with a max, a read-only display, and unit=\"lao\" for ກີບ on Lao-language screens. Controlled; value is a number or null.",
       "registryDependencies": [
         "input-group"
       ],
@@ -187,6 +187,26 @@
         },
         {
           "path": "lak-amount/lak.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "components/lao-phone",
+      "type": "registry:component",
+      "title": "Lao Phone",
+      "description": "Use when a form takes or a screen shows a Lao phone number: +856 with the Lao flag in front, mobile grouped as 20 5551 2345 and landlines as 21 412 345, pasted +856, 856 or 020 forms accepted, E.164 (+8562055512345) handed back once complete, and a tap-to-call display.",
+      "registryDependencies": [
+        "input-group",
+        "bstBizEra/ui-library/icons/flag#v1.3.0"
+      ],
+      "files": [
+        {
+          "path": "lao-phone/lao-phone-input.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lao-phone/lao-phone.ts",
           "type": "registry:lib"
         }
       ]

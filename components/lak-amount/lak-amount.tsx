@@ -3,7 +3,7 @@
 import { useRef } from "react"
 
 import { cn } from "@/lib/utils"
-import { caretAfterDigits, formatLak, formatLakDigits, parseLak } from "@/lib/lak"
+import { caretAfterDigits, formatLakDigits, lakUnitLabel, parseLak, type LakUnit } from "@/lib/lak"
 import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@/components/ui/input-group"
 
 type InputProps = Omit<React.ComponentProps<typeof InputGroupInput>, "value" | "defaultValue" | "onChange" | "type">
@@ -14,12 +14,14 @@ export function LakAmountInput({
   value,
   onValueChange,
   max = Number.MAX_SAFE_INTEGER,
+  unit = "symbol",
   className,
   ...props
 }: InputProps & {
   value: number | null
   onValueChange: (value: number | null) => void
   max?: number
+  unit?: LakUnit
 }) {
   const input = useRef<HTMLInputElement>(null)
 
@@ -51,17 +53,17 @@ export function LakAmountInput({
         {...props}
       />
       <InputGroupAddon align="inline-end">
-        <InputGroupText>₭</InputGroupText>
+        <InputGroupText lang={unit === "lao" ? "lo" : undefined}>{lakUnitLabel(unit)}</InputGroupText>
       </InputGroupAddon>
     </InputGroup>
   )
 }
 
-// An amount as text, e.g. 1,250,000 ₭. `data` keeps the machine value for scripts and tests.
-export function LakAmount({ amount, className }: { amount: number; className?: string }) {
+// An amount as text, e.g. 1,250,000 ₭ or 1,250,000 ກີບ. `data` keeps the machine value for scripts and tests.
+export function LakAmount({ amount, unit = "symbol", className }: { amount: number; unit?: LakUnit; className?: string }) {
   return (
     <data value={amount} className={cn("tabular-nums", className)}>
-      {formatLak(amount)}
+      {formatLakDigits(amount)} <span lang={unit === "lao" ? "lo" : undefined}>{lakUnitLabel(unit)}</span>
     </data>
   )
 }

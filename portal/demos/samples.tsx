@@ -5,6 +5,9 @@ import { RotateCcwIcon } from "lucide-react"
 
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@/components/dropzone"
 import { LakAmount, LakAmountInput } from "@/components/lak-amount"
+import { LaoPhoneInput } from "@/components/lao-phone-input"
+import type { LakUnit } from "@/lib/lak"
+import { toE164 } from "@/lib/lao-phone"
 import { Label } from "@/components/ui/label"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { ThemeToggle, type ThemeMode } from "@/components/theme-toggle"
@@ -13,16 +16,39 @@ import { Button } from "@/components/ui/button"
 import { type FlagCode } from "@/components/ui/flag"
 import { TextEffect, type PerType, type PresetType } from "@/components/ui/text-effect"
 
-export function LakAmountSample({ initial, max }: { initial: number | null; max?: number }) {
+export function LakAmountSample({ initial, max, unit }: { initial: number | null; max?: number; unit?: LakUnit }) {
   const [value, setValue] = useState(initial)
   const id = useId()
   return (
     <div className="grid w-full max-w-xs gap-2">
-      <Label htmlFor={id}>Amount</Label>
-      <LakAmountInput id={id} value={value} onValueChange={setValue} max={max} placeholder="0" />
+      <Label htmlFor={id}>{unit === "lao" ? <span lang="lo">ຈຳນວນເງິນ</span> : "Amount"}</Label>
+      <LakAmountInput id={id} value={value} onValueChange={setValue} max={max} unit={unit} placeholder="0" />
       <p className="text-sm text-muted-foreground">
-        {max !== undefined ? <>Limit <LakAmount amount={max} />. </> : null}
+        {max !== undefined ? <>Limit <LakAmount amount={max} unit={unit} />. </> : null}
         Value: <code className="font-mono">{value === null ? "null" : value}</code>
+      </p>
+    </div>
+  )
+}
+
+export function LaoPhoneSample({ initial }: { initial: string }) {
+  const [digits, setDigits] = useState(initial)
+  const [e164, setE164] = useState(() => toE164(initial))
+  const id = useId()
+  return (
+    <div className="grid w-full max-w-xs gap-2">
+      <Label htmlFor={id}>Phone</Label>
+      <LaoPhoneInput
+        id={id}
+        value={digits}
+        onValueChange={(d, e) => {
+          setDigits(d)
+          setE164(e)
+        }}
+        placeholder="20 5551 2345"
+      />
+      <p className="text-sm text-muted-foreground">
+        E.164: <code className="font-mono">{e164 ?? "null (incomplete)"}</code>
       </p>
     </div>
   )

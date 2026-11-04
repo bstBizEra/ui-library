@@ -3,7 +3,7 @@
 A shadcn source registry on GitHub. No build step: the CLI reads `registry.json` and its `include` entries.
 
 ```bash
-npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.2.0
+npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.3.0
 ```
 
 Items are named `<layer>/<item>` (for example `components/theme-toggle`). Pin a version with `#<ref>`. See `CATALOG.md` for every item, what it is for and its licence.
@@ -104,7 +104,17 @@ House item. `LakAmountInput` (controlled, value is whole kip or `null`, optional
 
 Verified 2026-11-04 in the portal (Base UI), with real keystrokes: typing `1250000` shows `1,250,000` (value `1250000`); typing `9` after the first digit gives `19,250,000` with the caret after the 9; a letter is ignored without moving the caret; pasting `1.250.000 ₭` gives `1,250,000`; with `max={5000000}` a digit that would pass it is refused and the caret stays; clearing gives `null`. Lighthouse accessibility (desktop) on the sample frames: empty, amount, limit and display states, navigation light 100 and dark 100 (8 runs). Detector: clean (source and rendered frames).
 
-Not covered: a `ກີບ` label instead of `₭`, screen readers, and phone keyboards (`inputMode="numeric"` is set but not tried on a device).
+`unit="lao"` (added 2026-11-04) writes the unit as `ກີບ` instead of `₭`, in the input's addon and in `LakAmount`, marked `lang="lo"`; `₭` stays the default. Checked in the portal: the input reads `1,250,000` followed by `ກີບ`, and `<LakAmount amount={1250000} unit="lao" />` renders `1,250,000 ກີບ`. Geist has no Lao glyphs, so `ກີບ` falls back to the system Lao font; load a Lao web font in apps that need a fixed look. Lighthouse accessibility on the Lao-unit and display frames: navigation light 100, dark 100.
+
+Not covered: screen readers, and phone keyboards (`inputMode="numeric"` is set but not tried on a device).
+
+### components/lao-phone
+
+House item. `LaoPhoneInput` (controlled; value is the national digits, `onValueChange(digits, e164)` hands back `+8562055512345` once the number is complete, `null` before) with the Lao flag and `+856` in front, and `LaoPhone` (a `tel:` link for a complete number). Logic in `lib/lao-phone.ts` (`formatLaoPhone`, `formatLaoPhoneNational`, `laoPhoneDigits`, `toE164`; unit tests in `scripts/lao-phone.test.mjs`). Needs `icons/flag`. Two shapes: mobile `20` + 8 digits, shown `20 5551 2345`; landline 2-digit area code + 6 digits, shown `21 412 345`. Other ranges (VoIP `30` numbers) are not handled; check the formats against the national numbering plan before relying on them for validation (not checked here).
+
+Verified 2026-11-04 in the portal (Base UI), with real keystrokes: typing `2055512345` shows `20 5551 2345` with E.164 `+8562055512345`; pasting `+856 20 5551 2345`, `856-20-5551-2345` and `020 5551 2345` all give the same digits, `(021) 412 345` gives `21 412 345`; an 11th mobile digit is refused; Backspace after the first `5` gives `20 5512 345` with the caret after `20`, and E.164 goes back to `null`. Lighthouse accessibility (desktop) on the empty, mobile, landline, incomplete and display frames: navigation light 100, dark 100 (10 runs). Detector: clean (source and rendered frames).
+
+Not covered: screen readers, phone keyboards (`type="tel"` is set but not tried on a device), and browser autofill of `tel-national`.
 
 ## License
 

@@ -56,3 +56,5 @@ next-env.d.ts
 /lib/format.ts
 /components/lak-amount.tsx
 /lib/lak.ts
+/components/lao-phone-input.tsx
+/lib/lao-phone.ts
