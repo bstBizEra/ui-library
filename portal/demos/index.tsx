@@ -1,0 +1,98 @@
+import type { ReactNode } from "react"
+
+import HeroCentered from "@/components/hero-centered"
+import { SearchIcon } from "@/components/ui/animated-search"
+import { Flag } from "@/components/ui/flag"
+
+import {
+  DropzoneSample,
+  LocaleSwitcherSample,
+  SearchButtonSample,
+  TextEffectSample,
+  ThemeToggleSample,
+} from "./samples"
+
+export type SampleState = {
+  id: string
+  label: string
+  // What this row shows that the others do not.
+  note: string
+  // Frame height in px; the frame is a real page, so menus and blocks need room.
+  height: number
+  render: () => ReactNode
+}
+
+export type Demo = {
+  // Blocks are page-wide: light and dark stack instead of sitting side by side.
+  wide?: boolean
+  states: SampleState[]
+  // Known issues worth knowing before install, from README "Verification".
+  notes?: string[]
+}
+
+export const demos: Record<string, Demo> = {
+  "theme-toggle": {
+    states: [
+      { id: "system", label: "System", note: 'value="system"', height: 96, render: () => <ThemeToggleSample initial="system" /> },
+      { id: "dark", label: "Dark picked", note: 'value="dark"', height: 96, render: () => <ThemeToggleSample initial="dark" /> },
+    ],
+  },
+  "locale-switcher": {
+    states: [
+      { id: "en", label: "English", note: 'value="en"', height: 96, render: () => <LocaleSwitcherSample initial="en" /> },
+      { id: "open", label: "Open", note: "Menu opened on load; pick a language to close it", height: 208, render: () => <LocaleSwitcherSample initial="en" openOnLoad /> },
+      { id: "lo", label: "Lao label", note: 'value="lo": checks the Lao script is not clipped', height: 96, render: () => <LocaleSwitcherSample initial="lo" /> },
+    ],
+    notes: [
+      "Lighthouse can score 96 with the menu open when the trigger sits at the viewport centre (Base UI focus guards, axe-core#4832). Take open-menu snapshots with the trigger off-centre.",
+    ],
+  },
+  dropzone: {
+    states: [
+      { id: "empty", label: "Empty", note: "Accepts PNG up to 1 MB", height: 232, render: () => <DropzoneSample state="empty" /> },
+      { id: "error", label: "Rejected file", note: "onError message rendered by the app", height: 264, render: () => <DropzoneSample state="error" /> },
+      { id: "file", label: "File chosen", note: "src holds one file", height: 232, render: () => <DropzoneSample state="file" /> },
+    ],
+    notes: ["The component only calls onError; render the message yourself, as the Rejected file row does."],
+  },
+  flag: {
+    states: [
+      {
+        id: "codes",
+        label: "All codes",
+        note: "en, lo, th, zh",
+        height: 96,
+        render: () => (
+          <ul className="flex gap-6 text-sm">
+            {(["en", "lo", "th", "zh"] as const).map((code) => (
+              <li key={code} className="flex items-center gap-2">
+                <Flag code={code} />
+                <code className="font-mono text-muted-foreground">{code}</code>
+              </li>
+            ))}
+          </ul>
+        ),
+      },
+      { id: "large", label: "Sized up", note: 'className="h-8 w-auto"', height: 112, render: () => <div className="flex gap-4">{(["en", "lo", "th", "zh"] as const).map((c) => <Flag key={c} code={c} className="h-8 w-auto" />)}</div> },
+    ],
+  },
+  "animated-search": {
+    states: [
+      { id: "button", label: "In a button", note: "Animates on hover and keyboard focus", height: 96, render: () => <SearchButtonSample /> },
+      { id: "icon", label: "Icon alone", note: "Animates on its own hover; size={28}", height: 96, render: () => <SearchIcon aria-hidden="true" /> },
+    ],
+    notes: ["The animation does not honour prefers-reduced-motion; wrap the app in <MotionConfig reducedMotion=\"user\">."],
+  },
+  "text-effect": {
+    states: [
+      { id: "word", label: "Per word, fade", note: 'per="word" preset="fade"', height: 112, render: () => <TextEffectSample per="word" preset="fade" text="Ship the same UI twice" /> },
+      { id: "char", label: "Per character, blur", note: 'per="char" preset="blur"', height: 112, render: () => <TextEffectSample per="char" preset="blur" text="Ship the same UI twice" /> },
+    ],
+    notes: ["With reduced motion the text renders plainly, after hydration; the server HTML starts hidden."],
+  },
+  "hero-centered": {
+    wide: true,
+    states: [{ id: "default", label: "Default", note: "Placeholder copy and screenshot frame from the item", height: 480, render: () => <HeroCentered /> }],
+    notes: ["Needs Tailwind v4."],
+  },
+}

@@ -14,6 +14,10 @@ Items expect shadcn's `@/lib/utils` (`cn`) from `shadcn init`.
 
 On another machine or in a cloud session, install the agent skill with `npx skills add bstBizEra/ui-library --skill ui-library -g`.
 
+## Portal
+
+`portal/` is a local Next.js app that shows every item live, each state in light and dark side by side, with its pinned install command. Run `npm install` once in `portal/`, then `npm run serve` (production build on port 3000; `-- --port <n>` to change it). It copies the item files from this repo on every build (`npm run sync`), so it always shows the current files at the latest tag. A new item needs an entry in `portal/demos/index.tsx` listing its states.
+
 ## Adding an item
 
 1. Put the file in its layer folder (`icons/`, `components/`, `animation/`, `blocks/`) and add an entry to that layer's `registry.json`. Paths are relative to the layer file. The `description` starts with "Use when" wording: it becomes the catalogue line.

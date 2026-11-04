@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-04T00:00:00Z",
+  "title": "Design System: ui-library portal",
+  "extensions": {
+    "colorMeta": {
+      "background": { "role": "neutral", "displayName": "Paper", "canonical": "oklch(1 0 0)", "dark": "oklch(0.145 0 0)", "tonalRamp": ["oklch(0.15 0 0)", "oklch(0.27 0 0)", "oklch(0.38 0 0)", "oklch(0.5 0 0)", "oklch(0.61 0 0)", "oklch(0.73 0 0)", "oklch(0.84 0 0)", "oklch(0.95 0 0)"] },
+      "foreground": { "role": "neutral", "displayName": "Graphite", "canonical": "oklch(0.145 0 0)", "dark": "oklch(0.985 0 0)" },
+      "primary": { "role": "primary", "displayName": "Ink", "canonical": "oklch(0.205 0 0)", "dark": "oklch(0.922 0 0)", "tonalRamp": ["oklch(0.15 0 0)", "oklch(0.27 0 0)", "oklch(0.38 0 0)", "oklch(0.5 0 0)", "oklch(0.61 0 0)", "oklch(0.73 0 0)", "oklch(0.84 0 0)", "oklch(0.95 0 0)"] },
+      "primary-foreground": { "role": "neutral", "displayName": "Ink Reverse", "canonical": "oklch(0.985 0 0)", "dark": "oklch(0.205 0 0)" },
+      "muted": { "role": "neutral", "displayName": "Fog", "canonical": "oklch(0.97 0 0)", "dark": "oklch(0.269 0 0)", "usage": "Always at 50% opacity in the shell." },
+      "muted-foreground": { "role": "neutral", "displayName": "Pewter", "canonical": "oklch(0.556 0 0)", "dark": "oklch(0.708 0 0)" },
+      "border": { "role": "neutral", "displayName": "Hairline", "canonical": "oklch(0.922 0 0)", "dark": "oklch(1 0 0 / 10%)" },
+      "ring": { "role": "neutral", "displayName": "Haze", "canonical": "oklch(0.708 0 0)", "dark": "oklch(0.556 0 0)" },
+      "sidebar": { "role": "neutral", "displayName": "Off-white Rail", "canonical": "oklch(0.985 0 0)", "dark": "oklch(0.205 0 0)" },
+      "sidebar-accent": { "role": "neutral", "displayName": "Rail Hover", "canonical": "oklch(0.97 0 0)", "dark": "oklch(0.269 0 0)" }
+    },
+    "typographyMeta": {
+      "headline": { "displayName": "Headline", "purpose": "The item slug as page title; mono because it is a slug." },
+      "body": { "displayName": "Body", "purpose": "The muted use-when line under the title, max 42rem." },
+      "title": { "displayName": "Title", "purpose": "State labels and the Before you install heading." },
+      "label": { "displayName": "Label", "purpose": "Matrix column headers, sidebar layer groups, meta row, state notes." },
+      "identifier": { "displayName": "Identifier", "purpose": "Sidebar slugs and the install command; the version tag uses it at 0.75rem." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "colors-standard", "value": "150ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Nav link hover fill and the mobile Items chevron rotation (Tailwind defaults)." },
+      { "name": "copy-confirm", "value": "1600ms", "purpose": "How long Copy shows Check and Copied before reverting." },
+      { "name": "press", "value": "translateY(1px)", "purpose": "Button active nudge from base-nova." },
+      { "name": "theme-switch", "value": "none", "purpose": "next-themes disableTransitionOnChange; the D key toggles the shell theme." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px", "purpose": "Sidebar becomes a sticky 15rem column; matrix becomes a grid." },
+      { "name": "xl", "value": "1280px", "purpose": "Header splits into title block left, install command right." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Copy Button",
+      "kind": "button",
+      "refersTo": "button-copy",
+      "description": "The shell's one filled button; confirms in place with Check and Copied.",
+      "html": "<button class=\"ds-btn-copy\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\"/><path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\"/></svg><span>Copy</span></button>",
+      "css": ".ds-btn-copy { display: inline-flex; align-items: center; gap: 4px; height: 28px; padding: 0 10px; border: 1px solid transparent; border-radius: 8px; background: var(--primary); color: var(--primary-foreground); font: 500 0.8rem/1 var(--font-sans), sans-serif; cursor: pointer; transition: all 150ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-copy:hover { background: color-mix(in oklab, var(--primary) 80%, transparent); } .ds-btn-copy:focus-visible { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent); } .ds-btn-copy:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Install Command",
+      "kind": "custom",
+      "refersTo": "install-command",
+      "description": "Muted well with the pinned install command; the path truncates, the tag never does.",
+      "html": "<div class=\"ds-install\"><code class=\"ds-install-code\"><span class=\"ds-install-path\">npx shadcn@latest add bstBizEra/ui-library/components/locale-switcher</span><span class=\"ds-install-tag\">#v1.0.2</span></code><button class=\"ds-install-btn\">Copy</button></div>",
+      "css": ".ds-install { display: flex; align-items: center; gap: 8px; min-width: 0; max-width: 38rem; padding: 6px 6px 6px 12px; border: 1px solid var(--border); border-radius: 10px; background: color-mix(in oklab, var(--muted) 50%, transparent); } .ds-install-code { display: flex; min-width: 0; font: 400 13px/1.5 var(--font-mono), monospace; color: var(--foreground); } .ds-install-path { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .ds-install-tag { flex-shrink: 0; } .ds-install-btn { flex-shrink: 0; height: 28px; padding: 0 10px; border: 0; border-radius: 8px; background: var(--primary); color: var(--primary-foreground); font: 500 0.8rem/1 var(--font-sans), sans-serif; } .ds-install-btn:hover { background: color-mix(in oklab, var(--primary) 80%, transparent); } .ds-install-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent); }"
+    },
+    {
+      "name": "Item Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Sidebar of mono slugs grouped by layer; current item filled with the border colour.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Items\"><p class=\"ds-nav-group\">Components</p><a class=\"ds-nav-link\" href=\"#\">theme-toggle</a><a class=\"ds-nav-link\" href=\"#\" aria-current=\"page\">locale-switcher</a><a class=\"ds-nav-link\" href=\"#\">dropzone</a></nav>",
+      "css": ".ds-nav { display: flex; flex-direction: column; width: 15rem; padding: 20px 12px; background: var(--sidebar); color: var(--sidebar-foreground); } .ds-nav-group { margin: 0; padding: 0 8px 4px; font: 500 0.75rem/1rem var(--font-sans), sans-serif; color: var(--muted-foreground); } .ds-nav-link { display: block; padding: 6px 8px; border-radius: 8px; font: 400 13px/1.5 var(--font-mono), monospace; color: inherit; text-decoration: none; transition: color 150ms, background-color 150ms; } .ds-nav-link:hover { background: var(--sidebar-accent); color: var(--sidebar-accent-foreground); } .ds-nav-link:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--ring); } .ds-nav-link[aria-current=page] { background: var(--border); color: var(--foreground); font-weight: 600; }"
+    },
+    {
+      "name": "State Matrix",
+      "kind": "card",
+      "refersTo": "state-matrix",
+      "description": "Rounded bordered grid: state label column, then Light and Dark sample columns.",
+      "html": "<section class=\"ds-matrix\"><div class=\"ds-matrix-head\"><span>State</span><span>Light</span><span>Dark</span></div><div class=\"ds-matrix-row\"><div class=\"ds-matrix-label\"><h2>Open</h2><p>Menu opened on load</p></div><div class=\"ds-matrix-light\"></div><div class=\"ds-matrix-dark\"></div></div></section>",
+      "css": ".ds-matrix { overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); } .ds-matrix-head, .ds-matrix-row { display: grid; grid-template-columns: 10rem 1fr 1fr; } .ds-matrix-head { border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--muted) 50%, transparent); font: 500 0.75rem/1rem var(--font-sans), sans-serif; color: var(--muted-foreground); } .ds-matrix-head span { padding: 10px 16px; } .ds-matrix-head span + span, .ds-matrix-row > div + div { border-left: 1px solid var(--border); } .ds-matrix-label { padding: 16px; background: color-mix(in oklab, var(--muted) 50%, transparent); } .ds-matrix-label h2 { margin: 0; font: 500 0.875rem/1.25rem var(--font-sans), sans-serif; } .ds-matrix-label p { margin: 2px 0 0; font: 400 0.75rem/1rem var(--font-sans), sans-serif; color: var(--muted-foreground); } .ds-matrix-light { min-height: 96px; background: oklch(1 0 0); } .ds-matrix-dark { min-height: 96px; background: oklch(0.145 0 0); }"
+    },
+    {
+      "name": "Mobile Items Toggle",
+      "kind": "button",
+      "refersTo": "nav-link",
+      "description": "Below md, the bordered toggle that hides the item list and shows the current slug.",
+      "html": "<button class=\"ds-items-toggle\" aria-expanded=\"false\"><span>Items<span class=\"ds-items-current\">locale-switcher</span></span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></button>",
+      "css": ".ds-items-toggle { display: flex; width: 100%; align-items: center; justify-content: space-between; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--foreground); font: 400 0.875rem/1.25rem var(--font-sans), sans-serif; } .ds-items-toggle svg { transition: transform 150ms cubic-bezier(0.4,0,0.2,1); } .ds-items-toggle[aria-expanded=true] svg { transform: rotate(180deg); } .ds-items-toggle:focus-visible { outline: 2px solid color-mix(in oklab, var(--ring) 50%, transparent); } .ds-items-current { margin-left: 8px; font-family: var(--font-mono), monospace; color: var(--muted-foreground); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Proof Sheet",
+    "overview": "The portal is a contact sheet for components: every state of one item printed side by side, light and dark, on a neutral ground that does not argue with the samples. The shell is shadcn base-nova on the neutral base colour, with its tokens shipped unchanged, because a sample has to look in the portal exactly as it will in a consuming app. Any tuning of the tokens would make the portal lie.\n\nDensity is working-reference density: a 15rem sidebar of item slugs grouped by layer, then the item's name, one use-when line, a meta row, and the install command, then the state matrix. Structure comes from 1px hairlines and a faint muted tint on label cells, never from shadow or colour. The only colour on the page is what the samples bring, and the dark column is itself the strongest tonal block.\n\nBuilt with Next.js and shadcn on Base UI; type is Geist for prose and labels, Geist Mono for anything a person types.",
+    "keyCharacteristics": [
+      "Achromatic shell: base-nova neutral tokens, unedited, in both themes.",
+      "Flat surfaces divided by hairline borders and a muted/50 tint.",
+      "Mono only for typed identifiers: item slugs, the install command, the version tag.",
+      "The light and dark sample columns sit next to each other; neither is behind a toggle.",
+      "Gently rounded containers (8px to 14px) from the single `--radius` of 0.625rem."
+    ],
+    "rules": [
+      { "name": "The Unchanged Tokens Rule", "body": "The `:root` and `.dark` blocks in `portal/app/globals.css` are base-nova neutral as generated. Do not retune a token to fix the shell; fix the shell's class instead. Unused base tokens (chart ramp, destructive, the dark `sidebar-primary` blue) stay as generated and are not part of the shell's palette.", "section": "colors" },
+      { "name": "The Columns Are The Colour Rule", "body": "The shell stays achromatic so the samples are the only colour on the page. A shell element that introduces a hue competes with the thing being judged.", "section": "colors" },
+      { "name": "The Typed Identifier Rule", "body": "Mono is for strings a person types or pastes: item slugs, install commands, version tags. Descriptions, labels, notes and headings that are not identifiers stay in Geist.", "section": "typography" },
+      { "name": "The Hairline Rule", "body": "Shell structure is drawn with 1px border-colour lines and the muted tint, not with shadows or filled panels.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use the base-nova neutral tokens as generated, in both themes, for every shell surface.",
+      "Do set slugs, install commands and version tags in Geist Mono; set everything else in Geist.",
+      "Do divide shell regions with 1px border-colour hairlines and the muted/50 tint.",
+      "Do show light and dark samples side by side in their own fixed-theme frames.",
+      "Do keep the pinned tag visible whenever an install command truncates."
+    ],
+    "donts": [
+      "Don't edit the token values in globals.css to adjust how the shell looks.",
+      "Don't add a hue to shell chrome; the samples are the colour.",
+      "Don't add shadows to shell chrome; leave the samples' own popover and menu shadows as they ship.",
+      "Don't set descriptions, notes or headings that are not identifiers in mono."
+    ]
+  }
+}

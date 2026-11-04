@@ -30,7 +30,7 @@ function header(file) {
   return out;
 }
 
-function describe(item, layerDir) {
+export function describe(item, layerDir) {
   if (!item.files?.length) {
     return { kind: "pointer", source: (item.registryDependencies ?? []).join(", "), licence: "see source" };
   }

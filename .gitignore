@@ -1,1 +1,5 @@
 node_modules/
+
+# Impeccable scratch: decision sketches and review captures
+.impeccable/mocks/
+.impeccable/review/
