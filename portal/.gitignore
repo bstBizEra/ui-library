@@ -54,3 +54,5 @@ next-env.d.ts
 /hooks/use-debounced-callback.ts
 /lib/data-table-*.ts
 /lib/format.ts
+/components/lak-amount.tsx
+/lib/lak.ts

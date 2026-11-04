@@ -26,7 +26,7 @@
       ],
       "registryDependencies": [
         "dropdown-menu",
-        "bstBizEra/ui-library/icons/flag#v1.1.0"
+        "bstBizEra/ui-library/icons/flag#v1.2.0"
       ],
       "files": [
         {
@@ -168,6 +168,25 @@
         },
         {
           "path": "data-table/lib/data-table-filters.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "components/lak-amount",
+      "type": "registry:component",
+      "title": "LAK Amount",
+      "description": "Use when a form takes or a screen shows an amount in Lao kip: whole kip only, grouped as you type (1,250,000 ₭), pasted text like \"1.250.000 ₭\" accepted, with a max and a read-only display. Controlled; value is a number or null.",
+      "registryDependencies": [
+        "input-group"
+      ],
+      "files": [
+        {
+          "path": "lak-amount/lak-amount.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lak-amount/lak.ts",
           "type": "registry:lib"
         }
       ]

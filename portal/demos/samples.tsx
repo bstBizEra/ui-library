@@ -1,15 +1,32 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { RotateCcwIcon } from "lucide-react"
 
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from "@/components/dropzone"
+import { LakAmount, LakAmountInput } from "@/components/lak-amount"
+import { Label } from "@/components/ui/label"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { ThemeToggle, type ThemeMode } from "@/components/theme-toggle"
 import { SearchIcon, type SearchIconHandle } from "@/components/ui/animated-search"
 import { Button } from "@/components/ui/button"
 import { type FlagCode } from "@/components/ui/flag"
 import { TextEffect, type PerType, type PresetType } from "@/components/ui/text-effect"
+
+export function LakAmountSample({ initial, max }: { initial: number | null; max?: number }) {
+  const [value, setValue] = useState(initial)
+  const id = useId()
+  return (
+    <div className="grid w-full max-w-xs gap-2">
+      <Label htmlFor={id}>Amount</Label>
+      <LakAmountInput id={id} value={value} onValueChange={setValue} max={max} placeholder="0" />
+      <p className="text-sm text-muted-foreground">
+        {max !== undefined ? <>Limit <LakAmount amount={max} />. </> : null}
+        Value: <code className="font-mono">{value === null ? "null" : value}</code>
+      </p>
+    </div>
+  )
+}
 
 export function ThemeToggleSample({ initial }: { initial: ThemeMode }) {
   const [value, setValue] = useState(initial)

@@ -5,8 +5,10 @@ import { SearchIcon } from "@/components/ui/animated-search"
 import { Flag } from "@/components/ui/flag"
 
 import { DataTableSample } from "./data-table-sample"
+import { LakAmount } from "@/components/lak-amount"
 import {
   DropzoneSample,
+  LakAmountSample,
   LocaleSwitcherSample,
   SearchButtonSample,
   TextEffectSample,
@@ -97,6 +99,29 @@ export const demos: Record<string, Demo> = {
       { id: "char", label: "Per character, blur", note: 'per="char" preset="blur"', height: 112, render: () => <TextEffectSample per="char" preset="blur" text="Ship the same UI twice" /> },
     ],
     notes: ["With reduced motion the text renders plainly, after hydration; the server HTML starts hidden."],
+  },
+  "lak-amount": {
+    states: [
+      { id: "empty", label: "Empty", note: "value={null}; type or paste to fill", height: 120, render: () => <LakAmountSample initial={null} /> },
+      { id: "filled", label: "Amount", note: "value={1250000}", height: 120, render: () => <LakAmountSample initial={1250000} /> },
+      { id: "max", label: "With a limit", note: "max={5000000}: digits past the limit are refused", height: 140, render: () => <LakAmountSample initial={4800000} max={5000000} /> },
+      {
+        id: "display",
+        label: "Display",
+        note: "<LakAmount amount={…} />",
+        height: 112,
+        render: () => (
+          <ul className="grid gap-1 text-sm">
+            {[0, 50000, 1250000, 987654321].map((n) => (
+              <li key={n}>
+                <LakAmount amount={n} />
+              </li>
+            ))}
+          </ul>
+        ),
+      },
+    ],
+    notes: ["Whole kip only: kip has no cents in practice, so dots and commas in pasted text are read as grouping."],
   },
   "data-table": {
     wide: true,

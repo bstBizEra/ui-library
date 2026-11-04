@@ -3,7 +3,7 @@
 A shadcn source registry on GitHub. No build step: the CLI reads `registry.json` and its `include` entries.
 
 ```bash
-npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.1.0
+npx shadcn@latest add bstBizEra/ui-library/components/theme-toggle#v1.2.0
 ```
 
 Items are named `<layer>/<item>` (for example `components/theme-toggle`). Pin a version with `#<ref>`. See `CATALOG.md` for every item, what it is for and its licence.
@@ -97,6 +97,14 @@ Usage:
 - Give every column an explicit `id`. `useDataTable` skips columns without one for sorting and filtering, even when they have an accessor.
 - `mode: "client"` filters and pages the `data` you pass; the default `mode: "server"` expects `pageCount` and leaves the query to you.
 - Statuses as plain `outline` badges: shadcn's `destructive` badge is 4.0:1 in light mode, under AA.
+
+### components/lak-amount
+
+House item. `LakAmountInput` (controlled, value is whole kip or `null`, optional `max`) and `LakAmount` (read-only text in a `<data>` element), with the formatting in `lib/lak.ts` (`formatLak`, `formatLakDigits`, `parseLak`, `caretAfterDigits`; unit tests in `scripts/lak.test.mjs`). Kip is shown as whole kip grouped with commas and the ₭ sign after the number; every non-digit is dropped on input, so dots and commas in pasted text are read as grouping, never as decimals.
+
+Verified 2026-11-04 in the portal (Base UI), with real keystrokes: typing `1250000` shows `1,250,000` (value `1250000`); typing `9` after the first digit gives `19,250,000` with the caret after the 9; a letter is ignored without moving the caret; pasting `1.250.000 ₭` gives `1,250,000`; with `max={5000000}` a digit that would pass it is refused and the caret stays; clearing gives `null`. Lighthouse accessibility (desktop) on the sample frames: empty, amount, limit and display states, navigation light 100 and dark 100 (8 runs). Detector: clean (source and rendered frames).
+
+Not covered: a `ກີບ` label instead of `₭`, screen readers, and phone keyboards (`inputMode="numeric"` is set but not tried on a device).
 
 ## License
 
