@@ -1,4 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google"
+import { NuqsAdapter } from "nuqs/adapters/next/app"
+import { Suspense } from "react"
 
 import "../../../globals.css"
 import { ReportHeight } from "@/components/portal/report-height"
@@ -28,7 +30,10 @@ export default async function FrameLayout({
       style={{ colorScheme: theme === "dark" ? "dark" : "light" }}
     >
       <body className="bg-background text-foreground">
-        {children}
+        {/* Samples that keep state in the URL (data-table) read it through nuqs; frames are static, so suspend until the client reads it. */}
+        <NuqsAdapter>
+          <Suspense>{children}</Suspense>
+        </NuqsAdapter>
         <ReportHeight />
       </body>
     </html>

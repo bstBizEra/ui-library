@@ -23,7 +23,7 @@ const THEMES = ["light", "dark"] as const
 function Frame({ slug, state, theme }: { slug: string; state: SampleState; theme: (typeof THEMES)[number] }) {
   return (
     <SampleFrame
-      src={`/frame/${theme}/${slug}/${state.id}`}
+      src={`/frame/${theme}/${slug}/${state.id}${state.query ?? ""}`}
       title={`${slug}, ${state.label}, ${theme} theme`}
       minHeight={state.height}
     />
@@ -41,6 +41,8 @@ export default async function ItemPage({ params }: { params: Promise<{ slug: str
     item.licence,
     ...item.dependencies.map((d) => d.replace(/@[^@]*$/, "")),
   ]
+  const ownDeps = items.filter((i) => item.registryDependencies.includes(i.name))
+  const shadcnDeps = item.registryDependencies.filter((d) => !items.some((i) => i.name === d))
 
   return (
     <main className="min-w-0 px-4 py-6 md:px-8 md:py-8">
@@ -52,16 +54,13 @@ export default async function ItemPage({ params }: { params: Promise<{ slug: str
             {meta.map((m) => (
               <span key={m}>{m}</span>
             ))}
-            {item.registryDependencies.map((dep) => {
-              const own = items.find((i) => i.name === dep)
-              return own ? (
-                <Link key={dep} href={`/items/${own.slug}`} className="underline underline-offset-2 hover:text-foreground">
-                  needs {own.slug}
-                </Link>
-              ) : (
-                <span key={dep}>needs {dep}</span>
-              )
-            })}
+            {ownDeps.map((own) => (
+              <Link key={own.slug} href={`/items/${own.slug}`} className="underline underline-offset-2 hover:text-foreground">
+                needs {own.slug}
+              </Link>
+            ))}
+            {/* The CLI installs built-in shadcn components itself, so they share one line. */}
+            {shadcnDeps.length > 0 && <span>shadcn: {shadcnDeps.join(", ")}</span>}
           </p>
         </div>
         <div className="w-full xl:w-auto xl:max-w-[38rem]">

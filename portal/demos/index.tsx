@@ -4,6 +4,7 @@ import HeroCentered from "@/components/hero-centered"
 import { SearchIcon } from "@/components/ui/animated-search"
 import { Flag } from "@/components/ui/flag"
 
+import { DataTableSample } from "./data-table-sample"
 import {
   DropzoneSample,
   LocaleSwitcherSample,
@@ -19,12 +20,16 @@ export type SampleState = {
   note: string
   // Frame height in px; the frame is a real page, so menus and blocks need room.
   height: number
+  // Search string the frame opens with, for items that keep their state in the URL.
+  query?: string
   render: () => ReactNode
 }
 
 export type Demo = {
   // Blocks are page-wide: light and dark stack instead of sitting side by side.
   wide?: boolean
+  // The sample draws its own page edges (a hero block), so its frame gets no padding.
+  bleed?: boolean
   states: SampleState[]
   // Known issues worth knowing before install, from README "Verification".
   notes?: string[]
@@ -90,8 +95,22 @@ export const demos: Record<string, Demo> = {
     ],
     notes: ["With reduced motion the text renders plainly, after hydration; the server HTML starts hidden."],
   },
+  "data-table": {
+    wide: true,
+    states: [
+      { id: "empty", label: "Empty", note: "data={[]}", height: 280, render: () => <DataTableSample rows="none" /> },
+      { id: "filtered", label: "Filtered", note: "Status is Overdue, set in the URL", height: 560, query: "?status=overdue", render: () => <DataTableSample rows="all" /> },
+      { id: "paginated", label: "Paginated", note: "47 synthetic invoices, page 3 of 5", height: 560, query: "?page=3", render: () => <DataTableSample rows="all" /> },
+    ],
+    notes: [
+      "Wrap the app in NuqsAdapter (nuqs/adapters/next/app): filters, sorting and page live in the URL.",
+      "Give every column an explicit id: useDataTable skips columns without one for sorting and filtering, even when they have an accessor.",
+      "Base UI only. Radix projects install sadmann7/tablecn/data-table#2d74ac5827aa7abf60e334759e38cf7cdcb24d54.",
+    ],
+  },
   "hero-centered": {
     wide: true,
+    bleed: true,
     states: [{ id: "default", label: "Default", note: "Placeholder copy and screenshot frame from the item", height: 480, render: () => <HeroCentered /> }],
     notes: ["Needs Tailwind v4."],
   },

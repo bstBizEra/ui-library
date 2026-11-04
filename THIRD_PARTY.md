@@ -114,3 +114,35 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ```
+
+## components/data-table
+
+- Source: tablecn data table, Base UI variant, https://github.com/sadmann7/tablecn/tree/2d74ac5827aa7abf60e334759e38cf7cdcb24d54/src/registry/bases/base
+- Repo: https://github.com/sadmann7/tablecn
+- Commit: 2d74ac5827aa7abf60e334759e38cf7cdcb24d54
+- Vendored: the 19 files of the upstream `data-table` registry item, taken from `src/registry/bases/base/` (components, `ui/faceted.tsx`, `ui/direction.tsx`, `hooks/use-data-table.ts`) plus the shared `src/hooks/use-debounced-callback.ts` and `src/lib/*` files, into `components/data-table/` (header comment added to each). Local changes, named in each file's header: (1) imports rewritten from `@/registry/bases/base/...` to the shadcn aliases a consumer project has; (2) `IconPlaceholder` replaced with the lucide-react icon it resolves to, which upstream's own registry build does for lucide projects; (3) `cn` imported from `@/lib/utils` instead of the `cn` package. Upstream's GitHub `registry.json` only lists the Radix files, so a pinned GitHub install gives Radix code; its hosted Base UI build is a newer, different item with no commit to pin.
+- Licence: MIT
+
+```text
+MIT License
+
+Copyright (c) 2024 Sadman Sakib
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```

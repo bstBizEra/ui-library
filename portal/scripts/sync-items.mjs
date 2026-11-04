@@ -16,8 +16,11 @@ for (const inc of JSON.parse(fs.readFileSync(path.join(root, "registry.json"), "
   const layerDir = path.join(root, path.dirname(inc))
   for (const item of JSON.parse(fs.readFileSync(path.join(root, inc), "utf8")).items) {
     for (const file of item.files ?? []) {
-      // registry:ui lands in components/ui, everything else in components (shadcn CLI default aliases).
-      const dest = path.join(portal, "components", file.type === "registry:ui" ? "ui" : "", path.basename(file.path))
+      // Where the shadcn CLI puts it with default aliases: an explicit target, else by type.
+      const byType = { "registry:ui": "components/ui", "registry:hook": "hooks", "registry:lib": "lib" }
+      const rel = file.target ?? path.join(byType[file.type] ?? "components", path.basename(file.path))
+      const dest = path.join(portal, rel)
+      fs.mkdirSync(path.dirname(dest), { recursive: true })
       fs.copyFileSync(path.join(layerDir, file.path), dest)
     }
     const d = describe(item, layerDir)

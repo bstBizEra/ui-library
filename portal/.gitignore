@@ -47,3 +47,10 @@ next-env.d.ts
 /components/ui/animated-search.tsx
 /components/ui/flag.tsx
 /components/ui/text-effect.tsx
+/components/data-table/
+/components/ui/direction.tsx
+/components/ui/faceted.tsx
+/hooks/use-data-table.ts
+/hooks/use-debounced-callback.ts
+/lib/data-table-*.ts
+/lib/format.ts

@@ -26,7 +26,7 @@
       ],
       "registryDependencies": [
         "dropdown-menu",
-        "bstBizEra/ui-library/icons/flag#v1.0.2"
+        "bstBizEra/ui-library/icons/flag#v1.1.0"
       ],
       "files": [
         {
@@ -51,6 +51,124 @@
         {
           "path": "dropzone.tsx",
           "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "components/data-table",
+      "type": "registry:component",
+      "title": "Data Table",
+      "description": "Use when a screen lists records that people sort, filter, page and hide columns on, with the table state kept in the URL (search params, via nuqs). Base UI only; Radix projects install sadmann7/tablecn/data-table#2d74ac5827aa7abf60e334759e38cf7cdcb24d54 instead. Needs a NuqsAdapter in the app layout. Vendored from tablecn (sadmann7/tablecn, MIT).",
+      "dependencies": [
+        "@tanstack/react-table@^9",
+        "nuqs@^2",
+        "zod@^4",
+        "cmdk@^1",
+        "react-day-picker@^10",
+        "@base-ui/react@^1",
+        "@base-ui/utils@^0.5",
+        "lucide-react@^1"
+      ],
+      "registryDependencies": [
+        "button",
+        "calendar",
+        "command",
+        "dropdown-menu",
+        "input",
+        "input-group",
+        "popover",
+        "select",
+        "separator",
+        "slider",
+        "table",
+        "label",
+        "skeleton"
+      ],
+      "files": [
+        {
+          "path": "data-table/data-table.tsx",
+          "type": "registry:component",
+          "target": "components/data-table/data-table.tsx"
+        },
+        {
+          "path": "data-table/data-table-column-header.tsx",
+          "type": "registry:component",
+          "target": "components/data-table/data-table-column-header.tsx"
+        },
+        {
+          "path": "data-table/data-table-pagination.tsx",
+          "type": "registry:component",
+          "target": "components/data-table/data-table-pagination.tsx"
+        },
+        {
+          "path": "data-table/data-table-view-options.tsx",
+          "type": "registry:component",
+          "target": "components/data-table/data-table-view-options.tsx"
+        },
+        {
+          "path": "data-table/data-table-faceted-filter.tsx",
+          "type": "registry:component",
+          "target": "components/data-table/data-table-faceted-filter.tsx"
+        },
+        {
+          "path": "data-table/data-table-toolbar.tsx",
+          "type": "registry:component",
+          "target": "components/data-table/data-table-toolbar.tsx"
+        },
+        {
+          "path": "data-table/data-table-slider-filter.tsx",
+          "type": "registry:component",
+          "target": "components/data-table/data-table-slider-filter.tsx"
+        },
+        {
+          "path": "data-table/data-table-date-filter.tsx",
+          "type": "registry:component",
+          "target": "components/data-table/data-table-date-filter.tsx"
+        },
+        {
+          "path": "data-table/data-table-skeleton.tsx",
+          "type": "registry:component",
+          "target": "components/data-table/data-table-skeleton.tsx"
+        },
+        {
+          "path": "data-table/ui/faceted.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "data-table/ui/direction.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "data-table/hooks/use-data-table.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "data-table/hooks/use-debounced-callback.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "data-table/lib/data-table-utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "data-table/lib/format.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "data-table/lib/data-table-parsers.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "data-table/lib/data-table-types.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "data-table/lib/data-table-features.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "data-table/lib/data-table-filters.ts",
+          "type": "registry:lib"
         }
       ]
     }

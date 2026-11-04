@@ -12,5 +12,6 @@ export default async function FramePage({ params }: { params: Promise<{ slug: st
   const { slug, state } = await params
   const sample = demos[slug]?.states.find((s) => s.id === state)
   if (!sample) notFound()
-  return <main className={demos[slug].wide ? "" : "flex items-start p-6"}>{sample.render()}</main>
+  const { wide, bleed } = demos[slug]
+  return <main className={bleed ? "" : wide ? "p-6" : "flex items-start p-6"}>{sample.render()}</main>
 }
