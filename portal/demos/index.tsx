@@ -22,6 +22,9 @@ export type SampleState = {
   height: number
   // Search string the frame opens with, for items that keep their state in the URL.
   query?: string
+  // Load with the page even below the first row: a sample that opens itself on load must do so
+  // while the page can still hand focus back, not later while the visitor scrolls.
+  eager?: boolean
   render: () => ReactNode
 }
 
@@ -45,7 +48,7 @@ export const demos: Record<string, Demo> = {
   "locale-switcher": {
     states: [
       { id: "en", label: "English", note: 'value="en"', height: 96, render: () => <LocaleSwitcherSample initial="en" /> },
-      { id: "open", label: "Open", note: "Menu opened on load; pick a language to close it", height: 208, render: () => <LocaleSwitcherSample initial="en" openOnLoad /> },
+      { id: "open", label: "Open", note: "Menu opened on load; pick a language to close it", height: 208, eager: true, render: () => <LocaleSwitcherSample initial="en" openOnLoad /> },
       { id: "lo", label: "Lao label", note: 'value="lo": checks the Lao script is not clipped', height: 96, render: () => <LocaleSwitcherSample initial="lo" /> },
     ],
     notes: [

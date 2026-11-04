@@ -20,12 +20,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 const THEMES = ["light", "dark"] as const
 
-function Frame({ slug, state, theme }: { slug: string; state: SampleState; theme: (typeof THEMES)[number] }) {
+// Rows after the first load lazily: every frame boots its own runtime.
+function Frame({ slug, state, theme, lazy }: { slug: string; state: SampleState; theme: (typeof THEMES)[number]; lazy: boolean }) {
   return (
     <SampleFrame
       src={`/frame/${theme}/${slug}/${state.id}${state.query ?? ""}`}
       title={`${slug}, ${state.label}, ${theme} theme`}
       minHeight={state.height}
+      lazy={lazy}
     />
   )
 }
@@ -87,7 +89,7 @@ export default async function ItemPage({ params }: { params: Promise<{ slug: str
             ))
           )}
         </div>
-        {demo.states.map((state) => (
+        {demo.states.map((state, i) => (
           <div
             key={state.id}
             className={cn(
@@ -102,14 +104,14 @@ export default async function ItemPage({ params }: { params: Promise<{ slug: str
             {demo.wide ? (
               <div className="divide-y border-t md:border-t-0 md:border-l">
                 {THEMES.map((t) => (
-                  <Frame key={t} slug={slug} state={state} theme={t} />
+                  <Frame key={t} slug={slug} state={state} theme={t} lazy={i > 0 && !state.eager} />
                 ))}
               </div>
             ) : (
               THEMES.map((t) => (
                 <div key={t} className="flex flex-col border-t md:border-t-0 md:border-l">
                   <p className="px-4 pt-2 text-xs text-muted-foreground capitalize md:hidden">{t}</p>
-                  <Frame slug={slug} state={state} theme={t} />
+                  <Frame slug={slug} state={state} theme={t} lazy={i > 0 && !state.eager} />
                 </div>
               ))
             )}

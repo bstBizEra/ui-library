@@ -34,6 +34,7 @@ Pass. The shell is base-nova tokens unchanged, so samples render exactly as in a
 - Impact: Opened over the LAN address `next start` prints (plain http, not localhost), `navigator.clipboard` is undefined; the click throws and the button never changes, so the visitor cannot tell the command was not copied.
 - Recommendation: Wrap the write in try/catch; on failure show "Copy failed" and select the command text so it can be copied by hand.
 - Suggested command: `/impeccable harden`
+- **Resolved 2026-11-04:** the write is in try/catch; on failure the button reads "Copy failed: press Ctrl+C" for 4 s and the full command is selected. A copy handler on the command puts the exact one-line text on the clipboard (a plain selection would split path and `#tag` onto two lines, since they are separate flex items). Checked with `clipboard.writeText` forced to reject: label, selection and copied text as described. The LAN address itself timed out from the test browser, so the missing-API case was exercised by the rejection, not reached by URL.
 
 **[P2] Sample frames load eagerly, each with its own runtime**
 - Location: `portal/components/portal/sample-frame.tsx`
@@ -41,6 +42,7 @@ Pass. The shell is base-nova tokens unchanged, so samples render exactly as in a
 - Impact: The dropzone page starts six documents at once (the JS is cached after the first). Fine at seven items; grows with states per item.
 - Recommendation: `loading="lazy"` on frames below the first row, keeping the height handshake (it already copes with late hydration).
 - Suggested command: `/impeccable optimize`
+- **Resolved 2026-11-04, with a limit:** rows after the first carry `loading="lazy"`; a state flagged `eager` (the locale-switcher's open menu) loads with the page, because a self-opening sample loaded mid-scroll would pull focus away from the visitor. On today's pages Chrome still loads every frame at once: native lazy loading defers only beyond its distance threshold (about 1,250–2,500 px), and the lowest frame starts near 1,300 px. The attribute pays off as items gain states. While fixing this, the focus hand-back moved from the frame's height report to the page's `blur` event: the height report could arrive before the menu took focus, which left focus in the dark "Open" frame.
 
 **[P3] Heading order: sidebar h2s precede the h1**
 - Location: `portal/components/portal/item-nav.tsx` (layer headings)
